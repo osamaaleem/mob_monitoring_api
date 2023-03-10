@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using mob_monitoring_api.Models;
@@ -17,90 +18,28 @@ namespace mob_monitoring_api.Controllers
         private FYP_DBEntities db = new FYP_DBEntities();
 
         // GET: api/Users
-        public IQueryable<User> GetUser()
+        [HttpPost]
+        public HttpResponseMessage Register([FromBody] User user)
         {
-            return db.User;
-        }
-
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
-        {
-            User user = db.User.Find(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(user);
-        }
-
-        // PUT: api/Users/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != user.UserID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Users
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             db.User.Add(user);
             db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
+        [HttpPost]
+        public HttpResponseMessage Login([FromBody] User user)
         {
-            User user = db.User.Find(id);
-            if (user == null)
+            String role = "Not Found";
+            var u = db.User.Where(x => x.Email == user.Email && x.Password == user.Password).Select(x => x.Role).FirstOrDefault();
+            if(u != null)
             {
-                return NotFound();
+                role = u.ToString();
             }
-
-            db.User.Remove(user);
-            db.SaveChanges();
-
-            return Ok(user);
+            string message = $"{{\"message\": \"{role}\"}}";
+            HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+            res.Content = new StringContent(message,Encoding.UTF8,"application/json");
+            return res;
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
