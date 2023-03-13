@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using mob_monitoring_api.Models;
@@ -15,92 +16,57 @@ namespace mob_monitoring_api.Controllers
     public class MobsController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
-
-        // GET: api/Mobs
-        public IQueryable<Mob> GetMob()
+        [HttpPost]
+        public HttpResponseMessage AddMob(Mob mob)
         {
-            return db.Mob;
-        }
-
-        // GET: api/Mobs/5
-        [ResponseType(typeof(Mob))]
-        public IHttpActionResult GetMob(int id)
-        {
-            Mob mob = db.Mob.Find(id);
-            if (mob == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(mob);
-        }
-
-        // PUT: api/Mobs/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMob(int id, Mob mob)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != mob.MobID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(mob).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MobExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Mobs
-        [ResponseType(typeof(Mob))]
-        public IHttpActionResult PostMob(Mob mob)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             db.Mob.Add(mob);
             db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = mob.MobID }, mob);
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
-
-        // DELETE: api/Mobs/5
-        [ResponseType(typeof(Mob))]
-        public IHttpActionResult DeleteMob(int id)
+        [HttpGet]
+        public HttpResponseMessage GetMob(int id)
         {
-            Mob mob = db.Mob.Find(id);
-            if (mob == null)
+            var m = db.Mob.Where(x => x.MobID == id).FirstOrDefault();
+            if (m == null)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-
-            db.Mob.Remove(mob);
-            db.SaveChanges();
-
-            return Ok(mob);
+            return Request.CreateResponse(HttpStatusCode.OK, m);
+        }
+        [HttpGet]
+        public HttpResponseMessage GetAllMobs()
+        {
+            //TODO:only the active mobs
+            List<Mob> mList = db.Mob.ToList();
+            if (mList != null && mList.Count > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, mList);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+            }
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetInactiveMobs()
+        {
+            var mobs = db.Mob.Where(x => x.IsActive == false).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, mobs);
+        }
+        [HttpGet]
+        public HttpResponseMessage GetActiveMobs()
+        {
+            var mobs = db.Mob.Where(x => x.IsActive == true).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, mobs);
+        }
+        public HttpResponseMessage UpdateMobs(Mob m)
+        {
+            Mob mob = db.Mob.Where(x => x.MobID == m.MobID).FirstOrDefault();
+            mob = m;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -110,9 +76,11 @@ namespace mob_monitoring_api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MobExists(int id)
+        private bool RedZoneExists(int id)
         {
-            return db.Mob.Count(e => e.MobID == id) > 0;
+            return db.RedZone.Count(e => e.RedZoneID == id) > 0;
         }
-    }
+    } 
+
+      
 }
