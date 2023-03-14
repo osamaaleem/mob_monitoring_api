@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using mob_monitoring_api.Models;
@@ -18,28 +17,100 @@ namespace mob_monitoring_api.Controllers
         private FYP_DBEntities db = new FYP_DBEntities();
 
         // GET: api/Users
+<<<<<<< HEAD
         [HttpPost]
         public HttpResponseMessage Register(User user)
+=======
+        public IQueryable<User> GetUser()
+>>>>>>> parent of a868ab5 (added-authentication-functionality)
         {
-            db.User.Add(user);
-            db.SaveChanges();
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return db.User;
         }
 
+<<<<<<< HEAD
         [HttpPost]
         public HttpResponseMessage Login(User user)
+=======
+        // GET: api/Users/5
+        [ResponseType(typeof(User))]
+        public IHttpActionResult GetUser(int id)
+>>>>>>> parent of a868ab5 (added-authentication-functionality)
         {
-            String role = "Not Found";
-            var u = db.User.Where(x => x.Email == user.Email && x.Password == user.Password).Select(x => x.Role).FirstOrDefault();
-            if(u != null)
+            User user = db.User.Find(id);
+            if (user == null)
             {
-                role = u.ToString();
+                return NotFound();
             }
-            string message = $"{{\"message\": \"{role}\"}}";
-            HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-            res.Content = new StringContent(message,Encoding.UTF8,"application/json");
-            return res;
+
+            return Ok(user);
         }
+
+        // PUT: api/Users/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutUser(int id, User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != user.UserID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Users
+        [ResponseType(typeof(User))]
+        public IHttpActionResult PostUser(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.User.Add(user);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
+        }
+
+        // DELETE: api/Users/5
+        [ResponseType(typeof(User))]
+        public IHttpActionResult DeleteUser(int id)
+        {
+            User user = db.User.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            db.User.Remove(user);
+            db.SaveChanges();
+
+            return Ok(user);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
