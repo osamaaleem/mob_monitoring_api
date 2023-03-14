@@ -37,6 +37,7 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage GetAllMobs()
         {
             //TODO:only the active mobs
+            //TODO:also search by user and drone assigned
             List<Mob> mList = db.Mob.ToList();
             if (mList != null && mList.Count > 0)
             {
@@ -51,6 +52,7 @@ namespace mob_monitoring_api.Controllers
         [HttpGet]
         public HttpResponseMessage GetInactiveMobs()
         {
+            //date wise
             var mobs = db.Mob.Where(x => x.IsActive == false).ToList();
             return Request.CreateResponse(HttpStatusCode.OK, mobs);
         }
