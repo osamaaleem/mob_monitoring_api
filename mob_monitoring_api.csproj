@@ -163,7 +163,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\BarriersController.cs" />
     <Compile Include="Controllers\DronesController.cs" />
     <Compile Include="Controllers\MobDetailsController.cs" />
     <Compile Include="Controllers\MobsController.cs" />
