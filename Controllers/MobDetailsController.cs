@@ -12,21 +12,21 @@ using mob_monitoring_api.Models;
 
 namespace mob_monitoring_api.Controllers
 {
-    public class BarriersController : ApiController
+    public class MobDetailsController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
 
-        // GET: api/Barriers
-        [HttpGet]
-        public HttpResponseMessage GetBarriers(int id)
+        [HttpPost]
+        public HttpResponseMessage AddDetail(MobDetail entity)
         {
-            var b = db.Barrier.Where(x => x.MobID_FK == id);
-            return Request.CreateResponse(HttpStatusCode.OK,b);
+            db.MobDetail.Add(entity);
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
-        public HttpResponseMessage AddBarrier(Barrier b) {
-            db.Barrier.Add(b);
-            return Request.CreateResponse(HttpStatusCode.OK);
-        
+        [HttpGet]
+        public HttpResponseMessage GetDetails(int id)
+        {
+            var md = db.MobDetail.Where(x => x.MobID_FK == id).FirstOrDefault();
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
         protected override void Dispose(bool disposing)
         {
@@ -37,9 +37,9 @@ namespace mob_monitoring_api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BarrierExists(int id)
+        private bool MobDetailExists(int id)
         {
-            return db.Barrier.Count(e => e.BarrierID == id) > 0;
+            return db.MobDetail.Count(e => e.DetailID == id) > 0;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace mob_monitoring_api.Controllers
 
         // GET: api/Users
         [HttpPost]
-        public HttpResponseMessage Register([FromBody] User user)
+        public HttpResponseMessage Register(User user)
         {
             db.User.Add(user);
             db.SaveChanges();
@@ -27,7 +27,7 @@ namespace mob_monitoring_api.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Login([FromBody] User user)
+        public HttpResponseMessage Login(User user)
         {
             String role = "Not Found";
             var u = db.User.Where(x => x.Email == user.Email && x.Password == user.Password).Select(x => x.Role).FirstOrDefault();
