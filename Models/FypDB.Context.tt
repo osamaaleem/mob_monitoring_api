@@ -10,7 +10,7 @@ var typeMapper = new TypeMapper(code, ef, textTransform.Errors);
 var loader = new EdmMetadataLoader(textTransform.Host, textTransform.Errors);
 var itemCollection = loader.CreateEdmItemCollection(inputFile);
 var modelNamespace = loader.GetModelNamespace(inputFile);
-var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
+var codeStringGenerator = new CodeStringGenerator(code, typeMapper, https://localhost:44381/Models/FypDB.Context.ttef);
 
 var container = itemCollection.OfType<EntityContainer>().FirstOrDefault();
 if (container == null)
