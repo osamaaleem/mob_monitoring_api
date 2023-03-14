@@ -20,6 +20,7 @@ namespace mob_monitoring_api.Controllers
         public IQueryable<Mob> GetMob()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             db.Mob.Add(mob);
             db.SaveChanges();
             return new HttpResponseMessage(HttpStatusCode.OK);
@@ -51,6 +52,9 @@ namespace mob_monitoring_api.Controllers
 =======
             return db.Mob;
 >>>>>>> parent of 1321a0c (refactored-controllers)
+=======
+            return db.Mob;
+>>>>>>> parent of 1321a0c (refactored-controllers)
         }
 
         // GET: api/Mobs/5
@@ -58,10 +62,13 @@ namespace mob_monitoring_api.Controllers
         public IHttpActionResult GetMob(int id)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             //date wise
             var mobs = db.Mob.Where(x => x.IsActive == false).ToList();
             return Request.CreateResponse(HttpStatusCode.OK, mobs);
 =======
+=======
+>>>>>>> parent of 1321a0c (refactored-controllers)
             Mob mob = db.Mob.Find(id);
             if (mob == null)
             {
@@ -69,6 +76,9 @@ namespace mob_monitoring_api.Controllers
             }
 
             return Ok(mob);
+<<<<<<< HEAD
+>>>>>>> parent of 1321a0c (refactored-controllers)
+=======
 >>>>>>> parent of 1321a0c (refactored-controllers)
         }
 
