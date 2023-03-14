@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using mob_monitoring_api.Models;
@@ -16,9 +15,11 @@ namespace mob_monitoring_api.Controllers
     public class MobsController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
-        [HttpPost]
-        public HttpResponseMessage AddMob(Mob mob)
+
+        // GET: api/Mobs
+        public IQueryable<Mob> GetMob()
         {
+<<<<<<< HEAD
             db.Mob.Add(mob);
             db.SaveChanges();
             return new HttpResponseMessage(HttpStatusCode.OK);
@@ -47,28 +48,96 @@ namespace mob_monitoring_api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
+=======
+            return db.Mob;
+>>>>>>> parent of 1321a0c (refactored-controllers)
         }
 
-        [HttpGet]
-        public HttpResponseMessage GetInactiveMobs()
+        // GET: api/Mobs/5
+        [ResponseType(typeof(Mob))]
+        public IHttpActionResult GetMob(int id)
         {
+<<<<<<< HEAD
             //date wise
             var mobs = db.Mob.Where(x => x.IsActive == false).ToList();
             return Request.CreateResponse(HttpStatusCode.OK, mobs);
+=======
+            Mob mob = db.Mob.Find(id);
+            if (mob == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mob);
+>>>>>>> parent of 1321a0c (refactored-controllers)
         }
-        [HttpGet]
-        public HttpResponseMessage GetActiveMobs()
+
+        // PUT: api/Mobs/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutMob(int id, Mob mob)
         {
-            var mobs = db.Mob.Where(x => x.IsActive == true).ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != mob.MobID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(mob).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MobExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
-        public HttpResponseMessage UpdateMobs(Mob m)
+
+        // POST: api/Mobs
+        [ResponseType(typeof(Mob))]
+        public IHttpActionResult PostMob(Mob mob)
         {
-            Mob mob = db.Mob.Where(x => x.MobID == m.MobID).FirstOrDefault();
-            mob = m;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Mob.Add(mob);
             db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.OK);
+
+            return CreatedAtRoute("DefaultApi", new { id = mob.MobID }, mob);
         }
+
+        // DELETE: api/Mobs/5
+        [ResponseType(typeof(Mob))]
+        public IHttpActionResult DeleteMob(int id)
+        {
+            Mob mob = db.Mob.Find(id);
+            if (mob == null)
+            {
+                return NotFound();
+            }
+
+            db.Mob.Remove(mob);
+            db.SaveChanges();
+
+            return Ok(mob);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -78,11 +147,9 @@ namespace mob_monitoring_api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool RedZoneExists(int id)
+        private bool MobExists(int id)
         {
-            return db.RedZone.Count(e => e.RedZoneID == id) > 0;
+            return db.Mob.Count(e => e.MobID == id) > 0;
         }
-    } 
-
-      
+    }
 }

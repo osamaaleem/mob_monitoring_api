@@ -16,32 +16,90 @@ namespace mob_monitoring_api.Controllers
     {
         private FYP_DBEntities db = new FYP_DBEntities();
 
-        [HttpGet]
-        public HttpResponseMessage GetAllZones()
+        // GET: api/RedZones
+        public IQueryable<RedZone> GetRedZone()
         {
-            var z = db.RedZone.ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, z);
+            return db.RedZone;
         }
-        [HttpGet]
-        public HttpResponseMessage GetActiveZones()
+
+        // GET: api/RedZones/5
+        [ResponseType(typeof(RedZone))]
+        public IHttpActionResult GetRedZone(int id)
         {
-            var z = db.RedZone.Where(x => x.IsActive == "1").ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, z);
+            RedZone redZone = db.RedZone.Find(id);
+            if (redZone == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(redZone);
         }
-        [HttpGet]
-        public HttpResponseMessage GetInActiveMobs()
+
+        // PUT: api/RedZones/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutRedZone(int id, RedZone redZone)
         {
-            var z = db.RedZone.Where(x => x.IsActive == "0").ToList();
-            return Request.CreateResponse(HttpStatusCode.OK,z);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != redZone.RedZoneID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(redZone).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RedZoneExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
-        [HttpPost]
-        public HttpResponseMessage AddRedZone(RedZone r)
+
+        // POST: api/RedZones
+        [ResponseType(typeof(RedZone))]
+        public IHttpActionResult PostRedZone(RedZone redZone)
         {
-            db.RedZone.Add(r);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.RedZone.Add(redZone);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = redZone.RedZoneID }, redZone);
         }
-        [HttpPost]
-       
+
+        // DELETE: api/RedZones/5
+        [ResponseType(typeof(RedZone))]
+        public IHttpActionResult DeleteRedZone(int id)
+        {
+            RedZone redZone = db.RedZone.Find(id);
+            if (redZone == null)
+            {
+                return NotFound();
+            }
+
+            db.RedZone.Remove(redZone);
+            db.SaveChanges();
+
+            return Ok(redZone);
+        }
 
         protected override void Dispose(bool disposing)
         {
