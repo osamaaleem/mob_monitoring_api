@@ -21,7 +21,7 @@ namespace mob_monitoring_api.Controllers
         {
             db.Mob.Add(mob);
             db.SaveChanges();
-            int id = db.Mob.Where(x => x.Equals(mob)).Select(x => x.MobID).FirstOrDefault();
+            var id = db.Mob.Where(x => x.Name == mob.Name).Select(x => x.MobID).FirstOrDefault();
             MobDetail mobDetail = new MobDetail();
             mobDetail.MobID_FK = id;
             db.MobDetail.Add(mobDetail);
@@ -76,7 +76,7 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage AssignedUser()
         {
             List<Mob> mList = new List<Mob>();
-            List<int> id = (List<int>)db.MobDetail.Where(x => x.UsersID_FK != null).Select(x => x.MobID_FK);
+            var id = db.MobDetail.Where(x => x.UsersID_FK != null).Select(x => x.MobID_FK);
             foreach(int i in id)
             {
                 Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
@@ -92,7 +92,7 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage NotAssignedUser()
         {
             List<Mob> mList = new List<Mob>();
-            List<int> id = (List<int>)db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
+            var id = db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK).ToList();
             foreach (int i in id)
             {
                 Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
@@ -108,7 +108,7 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage WithDrone()
         {
             List<Mob> mList = new List<Mob>();
-            List<int> id = (List<int>)db.MobDetail.Where(x => x.DroneID_FK != null).Select(x => x.MobID_FK);
+            var id = db.MobDetail.Where(x => x.DroneID_FK != null).Select(x => x.MobID_FK);
             foreach (int i in id)
             {
                 Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
@@ -124,7 +124,7 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage WithoutDrone()
         {
             List<Mob> mList = new List<Mob>();
-            List<int> id = (List<int>)db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
+            var id = db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
             foreach (int i in id)
             {
                 Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
