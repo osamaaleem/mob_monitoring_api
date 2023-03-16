@@ -21,6 +21,11 @@ namespace mob_monitoring_api.Controllers
         {
             db.Mob.Add(mob);
             db.SaveChanges();
+            int id = db.Mob.Where(x => x.Equals(mob)).Select(x => x.MobID).FirstOrDefault();
+            MobDetail mobDetail = new MobDetail();
+            mobDetail.MobID_FK = id;
+            db.MobDetail.Add(mobDetail);
+            db.SaveChanges();
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
         [HttpGet]
@@ -67,6 +72,71 @@ namespace mob_monitoring_api.Controllers
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+        [HttpGet]
+        public HttpResponseMessage AssignedUser()
+        {
+            List<Mob> mList = new List<Mob>();
+            List<int> id = (List<int>)db.MobDetail.Where(x => x.UsersID_FK != null).Select(x => x.MobID_FK);
+            foreach(int i in id)
+            {
+                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+                mList.Add(m);
+            }
+            if(mList.Count == 0)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK,mList);
+        }
+        [HttpGet]
+        public HttpResponseMessage NotAssignedUser()
+        {
+            List<Mob> mList = new List<Mob>();
+            List<int> id = (List<int>)db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
+            foreach (int i in id)
+            {
+                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+                mList.Add(m);
+            }
+            if (mList.Count == 0)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, mList);
+        }
+        [HttpGet]
+        public HttpResponseMessage WithDrone()
+        {
+            List<Mob> mList = new List<Mob>();
+            List<int> id = (List<int>)db.MobDetail.Where(x => x.DroneID_FK != null).Select(x => x.MobID_FK);
+            foreach (int i in id)
+            {
+                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+                mList.Add(m);
+            }
+            if (mList.Count == 0)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, mList);
+        }
+        [HttpGet]
+        public HttpResponseMessage WithoutDrone()
+        {
+            List<Mob> mList = new List<Mob>();
+            List<int> id = (List<int>)db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
+            foreach (int i in id)
+            {
+                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+                mList.Add(m);
+            }
+            if (mList.Count == 0)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, mList);
+        }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
