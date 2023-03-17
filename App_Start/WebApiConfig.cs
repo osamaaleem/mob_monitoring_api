@@ -25,21 +25,6 @@ namespace mob_monitoring_api
             );
 
         }
-        public static void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowReactApp",
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:3000")
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
-                    });
-            });
-
-            // Other service configurations
-        }
 
 
     }
