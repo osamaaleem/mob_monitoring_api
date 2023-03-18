@@ -17,7 +17,7 @@ namespace mob_monitoring_api.Controllers
     {
         private FYP_DBEntities db = new FYP_DBEntities();
         [HttpPost]
-        public HttpResponseMessage AddMob(Mob mob)
+        public HttpResponseMessage AddMob([FromBody] Mob mob)
         {
             db.Mob.Add(mob);
             db.SaveChanges();
