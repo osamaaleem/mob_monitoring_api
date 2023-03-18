@@ -15,6 +15,34 @@ namespace mob_monitoring_api.Controllers
     public class DronesController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
+        [HttpPost]
+        public HttpResponseMessage AddDrone(Drone drone)
+        {
+            try
+            {
+                db.Drone.Add(drone);
+                db.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+            
+        }
+        [HttpGet]
+        public HttpResponseMessage GetAllDrones()
+        {
+            try
+            {
+                var drones = db.Drone.ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, drones);
+            }
+            catch(Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
 
         // GET: api/Drones
         public IQueryable<Drone> GetDrone()
