@@ -25,7 +25,7 @@ namespace mob_monitoring_api.Models
         public Nullable<bool> IsAvailable { get; set; }
         public Nullable<double> Battery { get; set; }
         public Nullable<bool> IsCharged { get; set; }
-        public Nullable<int> BufferSize_MB_ { get; set; }
+        public Nullable<int> BufferSizeMb { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MobDetail> MobDetail { get; set; }

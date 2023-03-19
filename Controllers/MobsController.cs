@@ -141,7 +141,8 @@ namespace mob_monitoring_api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
-            return Request.CreateResponse(HttpStatusCode.OK, mList);
+            List<Mob> mNullList = removeNullValues(mList);
+            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         private List<Mob> removeNullValues(List<Mob> mobs)
         {

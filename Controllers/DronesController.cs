@@ -16,7 +16,7 @@ namespace mob_monitoring_api.Controllers
     {
         private FYP_DBEntities db = new FYP_DBEntities();
         [HttpPost]
-        public HttpResponseMessage AddDrone(Drone drone)
+        public HttpResponseMessage AddDrone([FromBody]Drone drone)
         {
             try
             {
@@ -31,102 +31,17 @@ namespace mob_monitoring_api.Controllers
             
         }
         [HttpGet]
-        public HttpResponseMessage GetAllDrones()
+        public HttpResponseMessage GetAllDroness()
         {
             try
             {
-                var drones = db.Drone.ToList();
-                return Request.CreateResponse(HttpStatusCode.OK, drones);
+                var Droness = db.Drone.ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, Droness);
             }
             catch(Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
-        }
-
-        // GET: api/Drones
-        public IQueryable<Drone> GetDrone()
-        {
-            return db.Drone;
-        }
-
-        // GET: api/Drones/5
-        [ResponseType(typeof(Drone))]
-        public IHttpActionResult GetDrone(int id)
-        {
-            Drone drone = db.Drone.Find(id);
-            if (drone == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(drone);
-        }
-
-        // PUT: api/Drones/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDrone(int id, Drone drone)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != drone.DroneID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(drone).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DroneExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Drones
-        [ResponseType(typeof(Drone))]
-        public IHttpActionResult PostDrone(Drone drone)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Drone.Add(drone);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = drone.DroneID }, drone);
-        }
-
-        // DELETE: api/Drones/5
-        [ResponseType(typeof(Drone))]
-        public IHttpActionResult DeleteDrone(int id)
-        {
-            Drone drone = db.Drone.Find(id);
-            if (drone == null)
-            {
-                return NotFound();
-            }
-
-            db.Drone.Remove(drone);
-            db.SaveChanges();
-
-            return Ok(drone);
         }
 
         protected override void Dispose(bool disposing)
@@ -138,7 +53,7 @@ namespace mob_monitoring_api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool DroneExists(int id)
+        private bool DronesExists(int id)
         {
             return db.Drone.Count(e => e.DroneID == id) > 0;
         }

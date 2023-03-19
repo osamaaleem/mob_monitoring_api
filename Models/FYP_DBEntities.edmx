@@ -19,7 +19,6 @@
           </Key>
           <Property Name="BarrierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MobID_FK" Type="int" />
-          <Property Name="IsAvailable" Type="bit" />
           <Property Name="BarrierLat" Type="float" />
           <Property Name="BarrierLon" Type="float" />
         </EntityType>
@@ -32,7 +31,7 @@
           <Property Name="IsAvailable" Type="bit" />
           <Property Name="Battery" Type="float" />
           <Property Name="IsCharged" Type="bit" />
-          <Property Name="BufferSize(MB)" Type="int" />
+          <Property Name="BufferSizeMb" Type="int" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -343,7 +342,6 @@
           </Key>
           <Property Name="BarrierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MobID_FK" Type="Int32" />
-          <Property Name="IsAvailable" Type="Boolean" />
           <Property Name="BarrierLat" Type="Double" />
           <Property Name="BarrierLon" Type="Double" />
           <NavigationProperty Name="Mob" Relationship="Self.FK__Barrier__MobID_F__60A75C0F" FromRole="Barrier" ToRole="Mob" />
@@ -357,7 +355,7 @@
           <Property Name="IsAvailable" Type="Boolean" />
           <Property Name="Battery" Type="Double" />
           <Property Name="IsCharged" Type="Boolean" />
-          <Property Name="BufferSize_MB_" Type="Int32" />
+          <Property Name="BufferSizeMb" Type="Int32" />
           <NavigationProperty Name="MobDetail" Relationship="Self.FK__MobDetail__Drone__5629CD9C" FromRole="Drone" ToRole="MobDetail" />
         </EntityType>
         <EntityType Name="Image">
@@ -686,7 +684,6 @@
               <MappingFragment StoreEntitySet="Barrier">
                 <ScalarProperty Name="BarrierID" ColumnName="BarrierID" />
                 <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="BarrierLat" ColumnName="BarrierLat" />
                 <ScalarProperty Name="BarrierLon" ColumnName="BarrierLon" />
               </MappingFragment>
@@ -700,7 +697,7 @@
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="Battery" ColumnName="Battery" />
                 <ScalarProperty Name="IsCharged" ColumnName="IsCharged" />
-                <ScalarProperty Name="BufferSize_MB_" ColumnName="BufferSize(MB)" />
+                <ScalarProperty Name="BufferSizeMb" ColumnName="BufferSizeMb" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
