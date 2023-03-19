@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -45,7 +46,8 @@ namespace mob_monitoring_api.Controllers
             List<Mob> mList = db.Mob.ToList();
             if (mList != null && mList.Count > 0)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, mList);
+                List<Mob> mNullList = removeNullValues(mList);
+                return Request.CreateResponse(HttpStatusCode.OK, mNullList);
             }
             else
             {
@@ -57,13 +59,15 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage GetInactiveMobs()
         {
             var mobs = db.Mob.Where(x => x.IsActive == false).ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            List<Mob> mNullList = removeNullValues(mobs);
+            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         [HttpGet]
         public HttpResponseMessage GetActiveMobs()
         {
             var mobs = db.Mob.Where(x => x.IsActive == true).ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            List<Mob> mNullList = removeNullValues(mobs);
+            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         public HttpResponseMessage UpdateMobs(Mob m)
         {
@@ -86,7 +90,8 @@ namespace mob_monitoring_api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
-            return Request.CreateResponse(HttpStatusCode.OK,mList);
+            List<Mob> mNullList = removeNullValues(mList);
+            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         [HttpGet]
         public HttpResponseMessage NotAssignedUser()
@@ -102,7 +107,8 @@ namespace mob_monitoring_api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
-            return Request.CreateResponse(HttpStatusCode.OK, mList);
+            List<Mob> mNullList = removeNullValues(mList);
+            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         [HttpGet]
         public HttpResponseMessage WithDrone()
@@ -118,7 +124,8 @@ namespace mob_monitoring_api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
-            return Request.CreateResponse(HttpStatusCode.OK, mList);
+            List<Mob> mNullList = removeNullValues(mList);
+            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         [HttpGet]
         public HttpResponseMessage WithoutDrone()
@@ -135,6 +142,19 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
             return Request.CreateResponse(HttpStatusCode.OK, mList);
+        }
+        private List<Mob> removeNullValues(List<Mob> mobs)
+        {
+            var list = new List<Mob>();
+            foreach (Mob m in mobs)
+            {
+                if (m.ProputedStrength == null || m.StartDate == null || m.IsActive == null || m.MobStartLat == null || m.MobStartLon == null)
+                {
+                    continue;
+                }
+                list.Add(m);
+            }
+            return list;
         }
         
         protected override void Dispose(bool disposing)
