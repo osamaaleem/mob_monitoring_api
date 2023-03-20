@@ -41,6 +41,12 @@ namespace mob_monitoring_api.Controllers
             
             
         }
+        [HttpGet]
+        public HttpResponseMessage GetAllUsers()
+        {
+            var users = db.User.ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, users);
+        }
 
         protected override void Dispose(bool disposing)
         {
