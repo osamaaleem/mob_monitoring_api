@@ -29,16 +29,25 @@ namespace mob_monitoring_api.Controllers
         [HttpPost]
         public HttpResponseMessage Login(User user)
         {
-            String role = "Not Found";
+            String role;
             var u = db.User.Where(x => x.Email == user.Email && x.Password == user.Password).Select(x => x.Role).FirstOrDefault();
             if (u != null)
             {
                 role = u.ToString();
+                string message = $"{{\"message\": \"{role}\"}}";
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                res.Content = new StringContent(message, Encoding.UTF8, "application/json");
+                return res;
             }
-            string message = $"{{\"message\": \"{role}\"}}";
-            HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-            res.Content = new StringContent(message, Encoding.UTF8, "application/json");
-            return res;
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+            
+            
+        }
+        [HttpGet]
+        public HttpResponseMessage GetAllUsers()
+        {
+            var users = db.User.ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
         protected override void Dispose(bool disposing)

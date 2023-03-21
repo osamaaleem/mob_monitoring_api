@@ -16,7 +16,6 @@ namespace mob_monitoring_api.Models
     {
         public int BarrierID { get; set; }
         public Nullable<int> MobID_FK { get; set; }
-        public Nullable<bool> IsAvailable { get; set; }
         public Nullable<double> BarrierLat { get; set; }
         public Nullable<double> BarrierLon { get; set; }
     
