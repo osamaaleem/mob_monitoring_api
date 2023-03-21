@@ -14,7 +14,7 @@ namespace mob_monitoring_api
             // Web API configuration and services
             // Enable CORS
             //var cors = new EnableCorsAttribute();
-            //config.EnableCors(cors);
+            config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
 
