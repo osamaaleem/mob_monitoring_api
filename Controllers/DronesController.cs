@@ -31,7 +31,7 @@ namespace mob_monitoring_api.Controllers
             
         }
         [HttpGet]
-        public HttpResponseMessage GetAllDroness()
+        public HttpResponseMessage GetAllDrones()
         {
             try
             {
