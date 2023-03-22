@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace mob_monitoring_api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*", exposedHeaders: "X-My-Header")]
     public class StandardController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
