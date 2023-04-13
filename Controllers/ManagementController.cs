@@ -21,14 +21,14 @@ namespace mob_monitoring_api.Controllers
             try
             {
                 Management management = new Management();
-                management.Mobs = db.Mob.Where(x => x.IsActive == true).Select(x => x.Name).ToList();
+                management.Mobs = db.Mob.Where(x => x.IsActive == true).ToList();
                 management.Users = db.User.Where(x => x.Role == "Standard").Select(x => x.Name).ToList();
                 management.Drones = db.Drone.Where(x => x.IsAvailable == true).Select(x => x.Name).ToList();
                 management.Operators = db.User.Where(x => x.Role == "Operator").Select(x => x.Name).ToList();
                 management.RedZones = db.RedZone.Select(x => x.Name).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, management);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }

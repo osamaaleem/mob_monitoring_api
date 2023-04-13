@@ -49,7 +49,26 @@ namespace mob_monitoring_api.Controllers
             var users = db.User.ToList();
             return Request.CreateResponse(HttpStatusCode.OK, users);
         }
-
+        [HttpPost]
+        public HttpResponseMessage DeleteUser(int id)
+        {
+            var user = db.User.Where(x => x.UserID == id).FirstOrDefault();
+            if (user != null)
+            {
+                db.User.Remove(user);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpPost]
+        public HttpResponseMessage UpdateUser(User user)
+        {
+            var u = db.User.Where(x => x.UserID == user.UserID).FirstOrDefault();
+            if (u != null) {
+                u = user;
+                db.SaveChanges();
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
