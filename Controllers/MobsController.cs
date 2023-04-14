@@ -32,6 +32,22 @@ namespace mob_monitoring_api.Controllers
             db.SaveChanges();
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
+        [HttpPost]
+        public HttpResponseMessage UpdateMob(Mob mob)
+        {
+            var m = db.Mob.Where(x => x.MobID == mob.MobID).FirstOrDefault();
+            m = mob;
+            db.SaveChanges();
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+        [HttpPost]
+        public HttpResponseMessage DeleteMob(int id)
+        {
+            var m = db.Mob.Where(x => x.MobID == id).FirstOrDefault();
+            db.Mob.Remove(m); 
+            db.SaveChanges();
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
         [HttpGet]
         public HttpResponseMessage GetMob(int id)
         {

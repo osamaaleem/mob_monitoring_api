@@ -32,6 +32,38 @@ namespace mob_monitoring_api.Controllers
             }
             
         }
+        [HttpPost]
+        public HttpResponseMessage UpdateDrone(Drone drone)
+        {
+            try
+            {
+                var d = db.Drone.Where(x => x.DroneID == drone.DroneID).FirstOrDefault();
+                if (d != null)
+                {
+                    d = drone;
+                    db.SaveChanges();
+                }
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception) { 
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpPost]
+        public HttpResponseMessage DeleteDrone(int id)
+        {
+            try
+            {
+                var drone = db.Drone.Where(x => x.DroneID == id).FirstOrDefault();
+                db.Drone.Remove(drone);
+                db.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
         [HttpGet]
         public HttpResponseMessage GetAllDrones()
         {

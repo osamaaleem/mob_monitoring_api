@@ -43,7 +43,21 @@ namespace mob_monitoring_api.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
         [HttpPost]
-       
+        public HttpResponseMessage DeleteZone(int id)
+        {
+            var z = db.RedZone.Where(x => x.RedZoneID == id).FirstOrDefault();
+            db.RedZone.Remove(z);
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpPost]
+        public HttpResponseMessage UpdateZone(RedZone r)
+        {
+            var z = db.RedZone.Where(x => x.RedZoneID == r.RedZoneID).FirstOrDefault();
+            z = r;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -30,6 +30,23 @@ namespace mob_monitoring_api.Controllers
             var md = db.MobDetail.Where(x => x.MobID_FK == id).FirstOrDefault();
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
+        [HttpPost]
+        public HttpResponseMessage UpdateDetail(MobDetail detail)
+        {
+            try
+            {
+                var det = db.MobDetail.Where(x => x.DetailID == detail.DetailID).FirstOrDefault();
+                if (det != null)
+                {
+                    det = detail;
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
