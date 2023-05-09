@@ -236,6 +236,7 @@
     <Compile Include="Controllers\MobsController.cs" />
     <Compile Include="Controllers\RedZonesController.cs" />
     <Compile Include="Controllers\StandardController.cs" />
+    <Compile Include="Controllers\TimelineController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
