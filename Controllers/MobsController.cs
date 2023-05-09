@@ -73,7 +73,29 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
         }
+        [HttpGet]
+        public HttpResponseMessage GetMobsByUserId(int id)
+        {
+            try
+            {
+                var mobIDs = db.MobDetail.Where(x => x.UsersID_FK == id).Select(x => x.MobID_FK).ToList();
+                if (mobIDs.Count == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "No Mobs Alloted Yet");
+                }
+                var mobs = db.Mob.Where(x => mobIDs.Contains(x.MobID)).ToList();
+                if (mobs.Count == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "No Mobs Alloted Yet");
+                }
 
+                return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
         [HttpGet]
         public HttpResponseMessage GetInactiveMobs()
         {
