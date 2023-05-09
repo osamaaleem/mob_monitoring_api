@@ -49,7 +49,7 @@ namespace mob_monitoring_api.Controllers
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage DeleteDrone(int id)
         {
             try
@@ -58,6 +58,29 @@ namespace mob_monitoring_api.Controllers
                 db.Drone.Remove(drone);
                 db.SaveChanges();
                 return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetAllotedDrones(int id)
+        {
+            try
+            {
+                var droneIDs = db.AllotedDrones.Where(x => x.UserID_FK == id).Select(x => x.DroneID_FK).ToList();
+                if(droneIDs .Count == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "No Drones Allocated Yet");
+                }
+                var drones = db.Drone.Where(x => droneIDs.Contains(x.DroneID)).ToList();
+                if(drones.Count == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "No Drones Allocated Yet");
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, drones);
             }
             catch (Exception)
             {

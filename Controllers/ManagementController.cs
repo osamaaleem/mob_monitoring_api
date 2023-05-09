@@ -34,5 +34,31 @@ namespace mob_monitoring_api.Controllers
             }
             
         }
+        [HttpGet]
+        public HttpResponseMessage GetOperators()
+        {
+            try
+            {
+                var operators = db.User.Where(x => x.Role == "Operator").Select(x => x.Name).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, operators);
+            }
+            catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+            
+        }
+        [HttpPost]
+        public HttpResponseMessage AllotDrones(AllotedDrones ad)
+        {
+            try
+            {
+                db.AllotedDrones.Add(ad);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            
+        }
     }
 }

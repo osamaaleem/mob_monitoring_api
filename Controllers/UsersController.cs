@@ -44,6 +44,19 @@ namespace mob_monitoring_api.Controllers
             
         }
         [HttpGet]
+        public HttpResponseMessage GetUserByEmail(string email)
+        {
+            try
+            {
+                int id = db.User.Where(x => x.Email == email).Select(x => x.UserID).FirstOrDefault();
+                return Request.CreateResponse(HttpStatusCode.OK,id);
+            }
+            catch 
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+        }
+        [HttpGet]
         public HttpResponseMessage GetAllUsers()
         {
             var users = db.User.ToList();
