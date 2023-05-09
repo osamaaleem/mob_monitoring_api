@@ -60,12 +60,28 @@ namespace mob_monitoring_api.Controllers
             }
             
         }
+        [HttpPost]
         public HttpResponseMessage AllocateMobToOperator(int mobId, int userId)
         {
             
-             md = new MobDetail();
-            md.MobID_FK = mobId;
-            md.UsersID_FK = userId;
+            MobOperator mo = new MobOperator();
+            mo.MobId_FK = mobId;
+            mo.UserId_FK = userId;
+            db.MobOperator.Add(mo);
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage AllocateMobToOfficer(int mobId, int userId)
+        {
+
+            MobOfficer mo = new MobOfficer();
+            mo.MobId_FK = mobId;
+            mo.UserId_FK = userId;
+            db.MobOfficer.Add(mo);
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }
