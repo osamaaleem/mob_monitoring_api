@@ -49,6 +49,33 @@ namespace mob_monitoring_api.Controllers
             }
         }
         [HttpGet]
+        public HttpResponseMessage GetRedZoneIdByName(String name) 
+        {
+            try
+            {
+                var redZoneName = db.RedZone.Where(x => x.Name == name).Select(x => x.RedZoneID);
+                return Request.CreateResponse(HttpStatusCode.OK, redZoneName);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpPost]
+        public HttpResponseMessage AddRedZoneCoords(List<RedZoneCoordinates> rcList)
+        {
+            try
+            {
+                db.RedZoneCoordinates.AddRange(rcList);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
         public HttpResponseMessage GetActiveZones()
         {
             var z = db.RedZone.Where(x => x.IsActive == "1").ToList();
