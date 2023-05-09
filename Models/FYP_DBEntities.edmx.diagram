@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da5a6aeaa09449d8aba8e1603d3fc997" Name="Diagram1">
+        <EntityTypeShape EntityType="FYP_DBModel.AllotedDrones" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.AllotedRedZones" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.Barrier" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.Drone" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.Image" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.Mob" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.MobDetail" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.MobTimeline" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.PreDefCoords" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.QRF" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.RedZone" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.RedZoneCoordinates" Width="1.5" PointX="10.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.User" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP_DBModel.Video" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
+        <AssociationConnector Association="FYP_DBModel.FK__AllotedDr__Drone__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__AllotedDr__UserI__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__AllotedRe__Detai__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__AllotedRe__RedZo__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__Barrier__MobID_F__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__Drone__UserID_FK__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__Drone__UserID_FK__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__MobDetail__Drone__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__Image__MobID_FK__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__MobDetail__MobID__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__PreDefCoo__MobID__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__Video__MobID_FK__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__MobDetail__Users__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__MobTimeli__Detai__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__QRF__UserID_FK__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="FYP_DBModel.FK__RedZoneCo__RedZo__52593CB8" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
