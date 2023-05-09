@@ -62,6 +62,7 @@ namespace mob_monitoring_api.Controllers
         }
         public HttpResponseMessage AllocateMobToOperator(int mobId, int userId)
         {
+            
              md = new MobDetail();
             md.MobID_FK = mobId;
             md.UsersID_FK = userId;
