@@ -25,6 +25,30 @@ namespace mob_monitoring_api.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, z);
         }
         [HttpGet]
+        public HttpResponseMessage GetRedZonesByMobId(int id)
+        {
+            try
+            {
+                var detIds = db.MobDetail.Where(x => x.MobID_FK == id).Select(x => x.DetailID).ToList();
+                if (detIds.Count == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+                var redzoneIds = db.AllotedRedZones.Where(x => detIds.Contains((int)x.DetailID_FK)).Select(x => x.RedZoneID_FK).ToList();
+                if (redzoneIds.Count == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+                var redzones = db.RedZone.Where(x => redzoneIds.Contains(x.RedZoneID)).ToList();
+
+                return Request.CreateResponse(HttpStatusCode.OK, redzones);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
         public HttpResponseMessage GetActiveZones()
         {
             var z = db.RedZone.Where(x => x.IsActive == "1").ToList();
