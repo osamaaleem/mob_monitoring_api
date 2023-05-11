@@ -13,16 +13,16 @@ namespace mob_monitoring_api.Controllers
     public class StandardController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
-        [HttpGet]
-        public HttpResponseMessage GetDetails(int userID)
-        {
-            var mb = db.MobDetail.Where(x => x.UsersID_FK == userID).FirstOrDefault();
-            if (mb != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK,mb);
-            }
-            return Request.CreateResponse(HttpStatusCode.NoContent);
-        }
+        //[HttpGet]
+        //public HttpResponseMessage GetDetails(int userID)
+        //{
+        //    var mb = db.MobDetail.Where(x => x.UsersID_FK == userID).FirstOrDefault();
+        //    if (mb != null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.OK,mb);
+        //    }
+        //    return Request.CreateResponse(HttpStatusCode.NoContent);
+        //}
         [HttpGet]
         public HttpResponseMessage GetDrone(int droneID)
         {

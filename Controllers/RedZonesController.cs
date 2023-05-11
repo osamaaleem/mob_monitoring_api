@@ -29,21 +29,15 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                var detIds = db.MobDetail.Where(x => x.MobID_FK == id).Select(x => x.DetailID).ToList();
-                if (detIds.Count == 0)
+                var zoneIds = db.AllotedRedZones.Where(x => x.MobID_FK == id).Select(x => x.RedZoneID_FK).ToList();
+                if(zoneIds.Count == 0)
                 {
                     return Request.CreateResponse(HttpStatusCode.NoContent);
                 }
-                var redzoneIds = db.AllotedRedZones.Where(x => detIds.Contains((int)x.DetailID_FK)).Select(x => x.RedZoneID_FK).ToList();
-                if (redzoneIds.Count == 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NoContent);
-                }
-                var redzones = db.RedZone.Where(x => redzoneIds.Contains(x.RedZoneID)).ToList();
-
-                return Request.CreateResponse(HttpStatusCode.OK, redzones);
+                var zones = db.RedZone.Where(x => zoneIds.Contains(x.RedZoneID)).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, zones);
             }
-            catch (Exception)
+            catch(Exception ex)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
@@ -69,6 +63,19 @@ namespace mob_monitoring_api.Controllers
                 db.RedZoneCoordinates.AddRange(rcList);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetRedZoneCoordsById(int zoneId)
+        {
+            try
+            {
+                var coords = db.RedZoneCoordinates.Where(x => x.RedZoneID_FK == zoneId).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, coords);
             }
             catch (Exception ex)
             {
