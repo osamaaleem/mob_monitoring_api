@@ -45,6 +45,18 @@ namespace mob_monitoring_api.Controllers
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
             
         }
+
+        [HttpGet]
+        public HttpResponseMessage GetOfficers()
+        {
+            try
+            {
+                var officers = db.User.Where(x => x.Role == "Officer").Select(x => x.Name).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, officers);
+            }
+            catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+
+        }
         [HttpPost]
         public HttpResponseMessage AllotDrones(AllotedDrones ad)
         {
