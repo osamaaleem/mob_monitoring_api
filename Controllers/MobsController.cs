@@ -26,9 +26,9 @@ namespace mob_monitoring_api.Controllers
             db.Mob.Add(mob);
             db.SaveChanges();
             var id = db.Mob.Where(x => x.Name == mob.Name).Select(x => x.MobID).FirstOrDefault();
-            MobDetail mobDetail = new MobDetail();
-            mobDetail.MobID_FK = id;
-            db.MobDetail.Add(mobDetail);
+            //MobDetail mobDetail = new MobDetail();
+            //mobDetail.MobID_FK = id;
+            //db.MobDetail.Add(mobDetail);
             db.SaveChanges();
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
@@ -73,29 +73,29 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
         }
-        [HttpGet]
-        public HttpResponseMessage GetMobsByUserId(int id)
-        {
-            try
-            {
-                var mobIDs = db.MobDetail.Where(x => x.UsersID_FK == id).Select(x => x.MobID_FK).ToList();
-                if (mobIDs.Count == 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NoContent, "No Mobs Alloted Yet");
-                }
-                var mobs = db.Mob.Where(x => mobIDs.Contains(x.MobID)).ToList();
-                if (mobs.Count == 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NoContent, "No Mobs Alloted Yet");
-                }
+        //[HttpGet]
+        //public HttpResponseMessage GetMobsByUserId(int id)
+        //{
+        //    try
+        //    {
+        //        var mobIDs = db.MobDetail.Where(x => x.UsersID_FK == id).Select(x => x.MobID_FK).ToList();
+        //        if (mobIDs.Count == 0)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.NoContent, "No Mobs Alloted Yet");
+        //        }
+        //        var mobs = db.Mob.Where(x => mobIDs.Contains(x.MobID)).ToList();
+        //        if (mobs.Count == 0)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.NoContent, "No Mobs Alloted Yet");
+        //        }
 
-                return Request.CreateResponse(HttpStatusCode.OK, mobs);
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
-        }
+        //        return Request.CreateResponse(HttpStatusCode.OK, mobs);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //    }
+        //}
         [HttpGet]
         public HttpResponseMessage GetInactiveMobs()
         {
@@ -117,74 +117,74 @@ namespace mob_monitoring_api.Controllers
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-        [HttpGet]
-        public HttpResponseMessage AssignedUser()
-        {
-            List<Mob> mList = new List<Mob>();
-            var id = db.MobDetail.Where(x => x.UsersID_FK != null).Select(x => x.MobID_FK);
-            foreach(int i in id)
-            {
-                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
-                mList.Add(m);
-            }
-            if(mList.Count == 0)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
-            }
-            List<Mob> mNullList = removeNullValues(mList);
-            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
-        }
-        [HttpGet]
-        public HttpResponseMessage NotAssignedUser()
-        {
-            List<Mob> mList = new List<Mob>();
-            var id = db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK).ToList();
-            foreach (int i in id)
-            {
-                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
-                mList.Add(m);
-            }
-            if (mList.Count == 0)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
-            }
-            List<Mob> mNullList = removeNullValues(mList);
-            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
-        }
-        [HttpGet]
-        public HttpResponseMessage WithDrone()
-        {
-            List<Mob> mList = new List<Mob>();
-            var id = db.MobDetail.Where(x => x.DroneID_FK != null).Select(x => x.MobID_FK);
-            foreach (int i in id)
-            {
-                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
-                mList.Add(m);
-            }
-            if (mList.Count == 0)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
-            }
-            List<Mob> mNullList = removeNullValues(mList);
-            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
-        }
-        [HttpGet]
-        public HttpResponseMessage WithoutDrone()
-        {
-            List<Mob> mList = new List<Mob>();
-            var id = db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
-            foreach (int i in id)
-            {
-                Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
-                mList.Add(m);
-            }
-            if (mList.Count == 0)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
-            }
-            List<Mob> mNullList = removeNullValues(mList);
-            return Request.CreateResponse(HttpStatusCode.OK, mNullList);
-        }
+        //[HttpGet]
+        //public HttpResponseMessage AssignedUser()
+        //{
+        //    List<Mob> mList = new List<Mob>();
+        //    var id = db.MobDetail.Where(x => x.UsersID_FK != null).Select(x => x.MobID_FK);
+        //    foreach(int i in id)
+        //    {
+        //        Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+        //        mList.Add(m);
+        //    }
+        //    if(mList.Count == 0)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+        //    }
+        //    List<Mob> mNullList = removeNullValues(mList);
+        //    return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+        //}
+        //[HttpGet]
+        //public HttpResponseMessage NotAssignedUser()
+        //{
+        //    List<Mob> mList = new List<Mob>();
+        //    var id = db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK).ToList();
+        //    foreach (int i in id)
+        //    {
+        //        Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+        //        mList.Add(m);
+        //    }
+        //    if (mList.Count == 0)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+        //    }
+        //    List<Mob> mNullList = removeNullValues(mList);
+        //    return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+        //}
+        //[HttpGet]
+        //public HttpResponseMessage WithDrone()
+        //{
+        //    List<Mob> mList = new List<Mob>();
+        //    var id = db.MobDetail.Where(x => x.DroneID_FK != null).Select(x => x.MobID_FK);
+        //    foreach (int i in id)
+        //    {
+        //        Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+        //        mList.Add(m);
+        //    }
+        //    if (mList.Count == 0)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+        //    }
+        //    List<Mob> mNullList = removeNullValues(mList);
+        //    return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+        //}
+        //[HttpGet]
+        //public HttpResponseMessage WithoutDrone()
+        //{
+        //    List<Mob> mList = new List<Mob>();
+        //    var id = db.MobDetail.Where(x => x.UsersID_FK == null).Select(x => x.MobID_FK);
+        //    foreach (int i in id)
+        //    {
+        //        Mob m = db.Mob.Where(x => x.MobID == i).FirstOrDefault();
+        //        mList.Add(m);
+        //    }
+        //    if (mList.Count == 0)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
+        //    }
+        //    List<Mob> mNullList = removeNullValues(mList);
+        //    return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+        //}
         private List<Mob> removeNullValues(List<Mob> mobs)
         {
             var list = new List<Mob>();
