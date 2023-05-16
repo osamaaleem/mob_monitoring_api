@@ -104,7 +104,6 @@ namespace mob_monitoring_api.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
         [HttpGet]
-        //public HttpResponseMessage GetActiveMobs()
         public HttpResponseMessage GetActiveMobs()
         {
             var mobs = db.Mob.Where(x => x.IsActive == true).ToList();
