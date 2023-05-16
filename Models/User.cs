@@ -18,8 +18,6 @@ namespace mob_monitoring_api.Models
         public User()
         {
             this.AllotedDrones = new HashSet<AllotedDrones>();
-            this.Drone = new HashSet<Drone>();
-            this.Drone1 = new HashSet<Drone>();
             this.MobOfficer = new HashSet<MobOfficer>();
             this.MobOperator = new HashSet<MobOperator>();
             this.QRF = new HashSet<QRF>();
@@ -34,10 +32,6 @@ namespace mob_monitoring_api.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AllotedDrones> AllotedDrones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Drone> Drone { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Drone> Drone1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MobOfficer> MobOfficer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
