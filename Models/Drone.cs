@@ -30,12 +30,9 @@ namespace mob_monitoring_api.Models
         public Nullable<double> Battery { get; set; }
         public Nullable<bool> IsCharged { get; set; }
         public Nullable<int> BufferSizeMb { get; set; }
-        public Nullable<int> UserID_FK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AllotedDrones> AllotedDrones { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Image { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
