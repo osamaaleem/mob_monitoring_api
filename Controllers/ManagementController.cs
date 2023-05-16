@@ -15,25 +15,25 @@ namespace mob_monitoring_api.Controllers
     {
         
         private FYP_DBEntities db = new FYP_DBEntities();
-        [HttpGet]
-        public HttpResponseMessage Get()
-        {
-            try
-            {
-                Management management = new Management();
-                management.Mobs = db.Mob.Where(x => x.IsActive == true).ToList();
-                management.Users = db.User.Where(x => x.Role == "Standard").Select(x => x.Name).ToList();
-                management.Drones = db.Drone.Where(x => x.IsAvailable == true).Select(x => x.Name).ToList();
-                management.Operators = db.User.Where(x => x.Role == "Operator").Select(x => x.Name).ToList();
-                management.RedZones = db.RedZone.Select(x => x.Name).ToList();
-                return Request.CreateResponse(HttpStatusCode.OK, management);
-            }
-            catch (Exception)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
-            }
+        //[HttpGet]
+        //public HttpResponseMessage Get()
+        //{
+        //    try
+        //    {
+        //        Management management = new Management();
+        //        management.Mobs = db.Mob.Where(x => x.IsActive == true).ToList();
+        //        management.Users = db.User.Where(x => x.Role == "Standard").Select(x => x.Name).ToList();
+        //        management.Drones = db.Drone.Where(x => x.IsAvailable == true).Select(x => x.Name).ToList();
+        //        management.Operators = db.User.Where(x => x.Role == "Operator").Select(x => x.Name).ToList();
+        //        management.RedZones = db.RedZone.Select(x => x.Name).ToList();
+        //        return Request.CreateResponse(HttpStatusCode.OK, management);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        //    }
             
-        }
+        //}
         [HttpGet]
         public HttpResponseMessage GetOperators()
         {
@@ -44,6 +44,18 @@ namespace mob_monitoring_api.Controllers
             }
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
             
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetOfficers()
+        {
+            try
+            {
+                var officers = db.User.Where(x => x.Role == "Officer").Select(x => x.Name).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, officers);
+            }
+            catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+
         }
         [HttpPost]
         public HttpResponseMessage AllotDrones(AllotedDrones ad)
