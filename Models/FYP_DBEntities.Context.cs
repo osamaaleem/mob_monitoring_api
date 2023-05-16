@@ -18,6 +18,7 @@ namespace mob_monitoring_api.Models
         public FYP_DBEntities()
             : base("name=FYP_DBEntities")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
