@@ -17,13 +17,14 @@ namespace mob_monitoring_api.Controllers
     public class RedZonesController : ApiController
     {
         private FYP_DBEntities db = new FYP_DBEntities();
-
         [HttpGet]
         public HttpResponseMessage GetAllZones()
         {
             var z = db.RedZone.ToList();
             return Request.CreateResponse(HttpStatusCode.OK, z);
         }
+
+        
         [HttpGet]
         public HttpResponseMessage GetRedZonesByMobId(int id)
         {

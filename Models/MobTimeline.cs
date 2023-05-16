@@ -24,6 +24,5 @@ namespace mob_monitoring_api.Models
         public Nullable<int> DroneID_FK { get; set; }
     
         public virtual Mob Mob { get; set; }
-        public virtual Mob Mob1 { get; set; }
     }
 }
