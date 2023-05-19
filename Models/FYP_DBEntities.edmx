@@ -1,0 +1,1364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FYP_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AllotedDrones">
+          <Key>
+            <PropertyRef Name="AllocationID" />
+          </Key>
+          <Property Name="AllocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DroneID_FK" Type="int" />
+          <Property Name="UserID_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="AllotedRedZones">
+          <Key>
+            <PropertyRef Name="AllotmentID" />
+          </Key>
+          <Property Name="AllotmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RedZoneID_FK" Type="int" />
+          <Property Name="MobID_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="Barrier">
+          <Key>
+            <PropertyRef Name="BarrierID" />
+          </Key>
+          <Property Name="BarrierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="BarrierLat" Type="float" />
+          <Property Name="BarrierLon" Type="float" />
+        </EntityType>
+        <EntityType Name="Drone">
+          <Key>
+            <PropertyRef Name="DroneID" />
+          </Key>
+          <Property Name="DroneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="10" />
+          <Property Name="IsAvailable" Type="bit" />
+          <Property Name="Battery" Type="float" />
+          <Property Name="IsCharged" Type="bit" />
+          <Property Name="BufferSizeMb" Type="int" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImgID" />
+          </Key>
+          <Property Name="ImgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="ImgDateTime" Type="datetime" />
+          <Property Name="ImgPath" Type="varchar" MaxLength="100" />
+          <Property Name="ImgLat" Type="float" />
+          <Property Name="ImgLon" Type="float" />
+          <Property Name="DroneID_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="Mob">
+          <Key>
+            <PropertyRef Name="MobID" />
+          </Key>
+          <Property Name="MobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="ProputedStrength" Type="int" />
+          <Property Name="ActualStrength" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="MobStartLat" Type="float" />
+          <Property Name="MobStartLon" Type="float" />
+          <Property Name="MobEndLat" Type="float" />
+          <Property Name="MobEndLon" Type="float" />
+          <Property Name="MobType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MobCoords">
+          <Key>
+            <PropertyRef Name="MobID" />
+          </Key>
+          <Property Name="MobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="MobLat" Type="float" />
+          <Property Name="MobLon" Type="float" />
+        </EntityType>
+        <EntityType Name="MobOfficer">
+          <Key>
+            <PropertyRef Name="moId" />
+          </Key>
+          <Property Name="moId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId_FK" Type="int" />
+          <Property Name="MobId_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="MobOperator">
+          <Key>
+            <PropertyRef Name="moId" />
+          </Key>
+          <Property Name="moId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId_FK" Type="int" />
+          <Property Name="MobId_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="MobTimeline">
+          <Key>
+            <PropertyRef Name="TimelineID" />
+          </Key>
+          <Property Name="TimelineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobStrength" Type="int" />
+          <Property Name="TimelineLon" Type="float" />
+          <Property Name="TimelineLat" Type="float" />
+          <Property Name="TimelineDate" Type="date" />
+          <Property Name="TimelineTime" Type="time" Precision="7" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="DroneID_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="PreDefCoords">
+          <Key>
+            <PropertyRef Name="PreDefID" />
+          </Key>
+          <Property Name="PreDefID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="PreDefLat" Type="float" />
+          <Property Name="PreDefLon" Type="float" />
+        </EntityType>
+        <EntityType Name="QRF">
+          <Key>
+            <PropertyRef Name="QrfId" />
+          </Key>
+          <Property Name="QrfId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID_FK" Type="int" />
+          <Property Name="QrfStrength" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+          <Property Name="QrfLocLat" Type="float" />
+          <Property Name="QrfLocLon" Type="float" />
+        </EntityType>
+        <EntityType Name="RedZone">
+          <Key>
+            <PropertyRef Name="RedZoneID" />
+          </Key>
+          <Property Name="RedZoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="10" />
+          <Property Name="IsActive" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="RedZoneCoordinates">
+          <Key>
+            <PropertyRef Name="CoordinateID" />
+          </Key>
+          <Property Name="CoordinateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RedZoneID_FK" Type="int" />
+          <Property Name="RedZoneLat" Type="float" />
+          <Property Name="RedZoneLon" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Organization" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="VidID" />
+          </Key>
+          <Property Name="VidID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="VidDate" Type="date" />
+          <Property Name="VidStartTime" Type="time" Precision="7" />
+          <Property Name="VidEndTime" Type="time" Precision="7" />
+          <Property Name="VidPath" Type="varchar" MaxLength="100" />
+          <Property Name="DroneID_FK" Type="int" />
+        </EntityType>
+        <Association Name="FK__AllotedDr__Drone__19DFD96B">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="AllotedDrones" Type="Self.AllotedDrones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="AllotedDrones">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedDr__UserI__1AD3FDA4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="AllotedDrones" Type="Self.AllotedDrones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AllotedDrones">
+              <PropertyRef Name="UserID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__MobID__2739D489">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__MobID__29221CFB">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__MobID__41EDCAC5">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__RedZo__59FA5E80">
+          <End Role="RedZone" Type="Self.RedZone" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RedZone">
+              <PropertyRef Name="RedZoneID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="RedZoneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Barrier__MobID_F__60A75C0F">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="Barrier" Type="Self.Barrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="Barrier">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Image__DroneID_F__2B0A656D">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Image__DroneID_F__43D61337">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Image__MobID_FK__66603565">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobCoords__MobID__625A9A57">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobCoords" Type="Self.MobCoords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobCoords">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOffice__MobId__40F9A68C">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobOfficer">
+              <PropertyRef Name="MobId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOffice__UserI__40058253">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MobOfficer">
+              <PropertyRef Name="UserId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOperat__MobId__3D2915A8">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobOperator" Type="Self.MobOperator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobOperator">
+              <PropertyRef Name="MobId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOperat__UserI__3C34F16F">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="MobOperator" Type="Self.MobOperator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MobOperator">
+              <PropertyRef Name="UserId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobTimeli__MobID__2A164134">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobTimeline" Type="Self.MobTimeline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobTimeline">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PreDefCoo__MobID__05D8E0BE">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="PreDefCoords" Type="Self.PreDefCoords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="PreDefCoords">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QRF__UserID_FK__5DCAEF64">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="QRF" Type="Self.QRF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="QRF">
+              <PropertyRef Name="UserID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RedZoneCo__RedZo__52593CB8">
+          <End Role="RedZone" Type="Self.RedZone" Multiplicity="0..1" />
+          <End Role="RedZoneCoordinates" Type="Self.RedZoneCoordinates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RedZone">
+              <PropertyRef Name="RedZoneID" />
+            </Principal>
+            <Dependent Role="RedZoneCoordinates">
+              <PropertyRef Name="RedZoneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Video__DroneID_F__2BFE89A6">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Video__DroneID_F__44CA3770">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Video__MobID_FK__693CA210">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FYP_DBModelStoreContainer">
+          <EntitySet Name="AllotedDrones" EntityType="Self.AllotedDrones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AllotedRedZones" EntityType="Self.AllotedRedZones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barrier" EntityType="Self.Barrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drone" EntityType="Self.Drone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mob" EntityType="Self.Mob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobCoords" EntityType="Self.MobCoords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobOfficer" EntityType="Self.MobOfficer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobOperator" EntityType="Self.MobOperator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobTimeline" EntityType="Self.MobTimeline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreDefCoords" EntityType="Self.PreDefCoords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QRF" EntityType="Self.QRF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RedZone" EntityType="Self.RedZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RedZoneCoordinates" EntityType="Self.RedZoneCoordinates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Video" EntityType="Self.Video" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AllotedDr__Drone__19DFD96B" Association="Self.FK__AllotedDr__Drone__19DFD96B">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="AllotedDrones" EntitySet="AllotedDrones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedDr__UserI__1AD3FDA4" Association="Self.FK__AllotedDr__UserI__1AD3FDA4">
+            <End Role="User" EntitySet="User" />
+            <End Role="AllotedDrones" EntitySet="AllotedDrones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__MobID__2739D489" Association="Self.FK__AllotedRe__MobID__2739D489">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__MobID__29221CFB" Association="Self.FK__AllotedRe__MobID__29221CFB">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__MobID__41EDCAC5" Association="Self.FK__AllotedRe__MobID__41EDCAC5">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__RedZo__59FA5E80" Association="Self.FK__AllotedRe__RedZo__59FA5E80">
+            <End Role="RedZone" EntitySet="RedZone" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Barrier__MobID_F__60A75C0F" Association="Self.FK__Barrier__MobID_F__60A75C0F">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="Barrier" EntitySet="Barrier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Image__DroneID_F__2B0A656D" Association="Self.FK__Image__DroneID_F__2B0A656D">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Image__DroneID_F__43D61337" Association="Self.FK__Image__DroneID_F__43D61337">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Image__MobID_FK__66603565" Association="Self.FK__Image__MobID_FK__66603565">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobCoords__MobID__625A9A57" Association="Self.FK__MobCoords__MobID__625A9A57">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobCoords" EntitySet="MobCoords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOffice__MobId__40F9A68C" Association="Self.FK__MobOffice__MobId__40F9A68C">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobOfficer" EntitySet="MobOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOffice__UserI__40058253" Association="Self.FK__MobOffice__UserI__40058253">
+            <End Role="User" EntitySet="User" />
+            <End Role="MobOfficer" EntitySet="MobOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOperat__MobId__3D2915A8" Association="Self.FK__MobOperat__MobId__3D2915A8">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobOperator" EntitySet="MobOperator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOperat__UserI__3C34F16F" Association="Self.FK__MobOperat__UserI__3C34F16F">
+            <End Role="User" EntitySet="User" />
+            <End Role="MobOperator" EntitySet="MobOperator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobTimeli__MobID__2A164134" Association="Self.FK__MobTimeli__MobID__2A164134">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobTimeline" EntitySet="MobTimeline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PreDefCoo__MobID__05D8E0BE" Association="Self.FK__PreDefCoo__MobID__05D8E0BE">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="PreDefCoords" EntitySet="PreDefCoords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QRF__UserID_FK__5DCAEF64" Association="Self.FK__QRF__UserID_FK__5DCAEF64">
+            <End Role="User" EntitySet="User" />
+            <End Role="QRF" EntitySet="QRF" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RedZoneCo__RedZo__52593CB8" Association="Self.FK__RedZoneCo__RedZo__52593CB8">
+            <End Role="RedZone" EntitySet="RedZone" />
+            <End Role="RedZoneCoordinates" EntitySet="RedZoneCoordinates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Video__DroneID_F__2BFE89A6" Association="Self.FK__Video__DroneID_F__2BFE89A6">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Video__DroneID_F__44CA3770" Association="Self.FK__Video__DroneID_F__44CA3770">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Video__MobID_FK__693CA210" Association="Self.FK__Video__MobID_FK__693CA210">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FYP_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AllotedDrones">
+          <Key>
+            <PropertyRef Name="AllocationID" />
+          </Key>
+          <Property Name="AllocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DroneID_FK" Type="Int32" />
+          <Property Name="UserID_FK" Type="Int32" />
+          <NavigationProperty Name="Drone" Relationship="Self.FK__AllotedDr__Drone__19DFD96B" FromRole="AllotedDrones" ToRole="Drone" />
+          <NavigationProperty Name="User" Relationship="Self.FK__AllotedDr__UserI__1AD3FDA4" FromRole="AllotedDrones" ToRole="User" />
+        </EntityType>
+        <EntityType Name="AllotedRedZones">
+          <Key>
+            <PropertyRef Name="AllotmentID" />
+          </Key>
+          <Property Name="AllotmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RedZoneID_FK" Type="Int32" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__AllotedRe__MobID__2739D489" FromRole="AllotedRedZones" ToRole="Mob" />
+          <NavigationProperty Name="Mob1" Relationship="Self.FK__AllotedRe__MobID__29221CFB" FromRole="AllotedRedZones" ToRole="Mob" />
+          <NavigationProperty Name="Mob2" Relationship="Self.FK__AllotedRe__MobID__41EDCAC5" FromRole="AllotedRedZones" ToRole="Mob" />
+          <NavigationProperty Name="RedZone" Relationship="Self.FK__AllotedRe__RedZo__59FA5E80" FromRole="AllotedRedZones" ToRole="RedZone" />
+        </EntityType>
+        <EntityType Name="Barrier">
+          <Key>
+            <PropertyRef Name="BarrierID" />
+          </Key>
+          <Property Name="BarrierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="BarrierLat" Type="Double" />
+          <Property Name="BarrierLon" Type="Double" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__Barrier__MobID_F__60A75C0F" FromRole="Barrier" ToRole="Mob" />
+        </EntityType>
+        <EntityType Name="Drone">
+          <Key>
+            <PropertyRef Name="DroneID" />
+          </Key>
+          <Property Name="DroneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="Battery" Type="Double" />
+          <Property Name="IsCharged" Type="Boolean" />
+          <Property Name="BufferSizeMb" Type="Int32" />
+          <NavigationProperty Name="AllotedDrones" Relationship="Self.FK__AllotedDr__Drone__19DFD96B" FromRole="Drone" ToRole="AllotedDrones" />
+          <NavigationProperty Name="Image" Relationship="Self.FK__Image__DroneID_F__2B0A656D" FromRole="Drone" ToRole="Image" />
+          <NavigationProperty Name="Image1" Relationship="Self.FK__Image__DroneID_F__43D61337" FromRole="Drone" ToRole="Image" />
+          <NavigationProperty Name="Video" Relationship="Self.FK__Video__DroneID_F__2BFE89A6" FromRole="Drone" ToRole="Video" />
+          <NavigationProperty Name="Video1" Relationship="Self.FK__Video__DroneID_F__44CA3770" FromRole="Drone" ToRole="Video" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImgID" />
+          </Key>
+          <Property Name="ImgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="ImgDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ImgPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgLat" Type="Double" />
+          <Property Name="ImgLon" Type="Double" />
+          <Property Name="DroneID_FK" Type="Int32" />
+          <NavigationProperty Name="Drone" Relationship="Self.FK__Image__DroneID_F__2B0A656D" FromRole="Image" ToRole="Drone" />
+          <NavigationProperty Name="Drone1" Relationship="Self.FK__Image__DroneID_F__43D61337" FromRole="Image" ToRole="Drone" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__Image__MobID_FK__66603565" FromRole="Image" ToRole="Mob" />
+        </EntityType>
+        <EntityType Name="Mob">
+          <Key>
+            <PropertyRef Name="MobID" />
+          </Key>
+          <Property Name="MobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ProputedStrength" Type="Int32" />
+          <Property Name="ActualStrength" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="MobStartLat" Type="Double" />
+          <Property Name="MobStartLon" Type="Double" />
+          <Property Name="MobEndLat" Type="Double" />
+          <Property Name="MobEndLon" Type="Double" />
+          <Property Name="MobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AllotedRedZones" Relationship="Self.FK__AllotedRe__MobID__2739D489" FromRole="Mob" ToRole="AllotedRedZones" />
+          <NavigationProperty Name="AllotedRedZones1" Relationship="Self.FK__AllotedRe__MobID__29221CFB" FromRole="Mob" ToRole="AllotedRedZones" />
+          <NavigationProperty Name="AllotedRedZones2" Relationship="Self.FK__AllotedRe__MobID__41EDCAC5" FromRole="Mob" ToRole="AllotedRedZones" />
+          <NavigationProperty Name="Barrier" Relationship="Self.FK__Barrier__MobID_F__60A75C0F" FromRole="Mob" ToRole="Barrier" />
+          <NavigationProperty Name="Image" Relationship="Self.FK__Image__MobID_FK__66603565" FromRole="Mob" ToRole="Image" />
+          <NavigationProperty Name="MobCoords" Relationship="Self.FK__MobCoords__MobID__625A9A57" FromRole="Mob" ToRole="MobCoords" />
+          <NavigationProperty Name="MobOfficer" Relationship="Self.FK__MobOffice__MobId__40F9A68C" FromRole="Mob" ToRole="MobOfficer" />
+          <NavigationProperty Name="MobOperator" Relationship="Self.FK__MobOperat__MobId__3D2915A8" FromRole="Mob" ToRole="MobOperator" />
+          <NavigationProperty Name="MobTimeline" Relationship="Self.FK__MobTimeli__MobID__2A164134" FromRole="Mob" ToRole="MobTimeline" />
+          <NavigationProperty Name="PreDefCoords" Relationship="Self.FK__PreDefCoo__MobID__05D8E0BE" FromRole="Mob" ToRole="PreDefCoords" />
+          <NavigationProperty Name="Video" Relationship="Self.FK__Video__MobID_FK__693CA210" FromRole="Mob" ToRole="Video" />
+        </EntityType>
+        <EntityType Name="MobCoords">
+          <Key>
+            <PropertyRef Name="MobID" />
+          </Key>
+          <Property Name="MobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="MobLat" Type="Double" />
+          <Property Name="MobLon" Type="Double" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__MobCoords__MobID__625A9A57" FromRole="MobCoords" ToRole="Mob" />
+        </EntityType>
+        <EntityType Name="MobOfficer">
+          <Key>
+            <PropertyRef Name="moId" />
+          </Key>
+          <Property Name="moId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId_FK" Type="Int32" />
+          <Property Name="MobId_FK" Type="Int32" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__MobOffice__MobId__40F9A68C" FromRole="MobOfficer" ToRole="Mob" />
+          <NavigationProperty Name="User" Relationship="Self.FK__MobOffice__UserI__40058253" FromRole="MobOfficer" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MobOperator">
+          <Key>
+            <PropertyRef Name="moId" />
+          </Key>
+          <Property Name="moId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId_FK" Type="Int32" />
+          <Property Name="MobId_FK" Type="Int32" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__MobOperat__MobId__3D2915A8" FromRole="MobOperator" ToRole="Mob" />
+          <NavigationProperty Name="User" Relationship="Self.FK__MobOperat__UserI__3C34F16F" FromRole="MobOperator" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MobTimeline">
+          <Key>
+            <PropertyRef Name="TimelineID" />
+          </Key>
+          <Property Name="TimelineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobStrength" Type="Int32" />
+          <Property Name="TimelineLon" Type="Double" />
+          <Property Name="TimelineLat" Type="Double" />
+          <Property Name="TimelineDate" Type="DateTime" Precision="0" />
+          <Property Name="TimelineTime" Type="Time" Precision="7" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="DroneID_FK" Type="Int32" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__MobTimeli__MobID__2A164134" FromRole="MobTimeline" ToRole="Mob" />
+        </EntityType>
+        <EntityType Name="PreDefCoords">
+          <Key>
+            <PropertyRef Name="PreDefID" />
+          </Key>
+          <Property Name="PreDefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="PreDefLat" Type="Double" />
+          <Property Name="PreDefLon" Type="Double" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__PreDefCoo__MobID__05D8E0BE" FromRole="PreDefCoords" ToRole="Mob" />
+        </EntityType>
+        <EntityType Name="QRF">
+          <Key>
+            <PropertyRef Name="QrfId" />
+          </Key>
+          <Property Name="QrfId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID_FK" Type="Int32" />
+          <Property Name="QrfStrength" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="QrfLocLat" Type="Double" />
+          <Property Name="QrfLocLon" Type="Double" />
+          <NavigationProperty Name="User" Relationship="Self.FK__QRF__UserID_FK__5DCAEF64" FromRole="QRF" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RedZone">
+          <Key>
+            <PropertyRef Name="RedZoneID" />
+          </Key>
+          <Property Name="RedZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AllotedRedZones" Relationship="Self.FK__AllotedRe__RedZo__59FA5E80" FromRole="RedZone" ToRole="AllotedRedZones" />
+          <NavigationProperty Name="RedZoneCoordinates" Relationship="Self.FK__RedZoneCo__RedZo__52593CB8" FromRole="RedZone" ToRole="RedZoneCoordinates" />
+        </EntityType>
+        <EntityType Name="RedZoneCoordinates">
+          <Key>
+            <PropertyRef Name="CoordinateID" />
+          </Key>
+          <Property Name="CoordinateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RedZoneID_FK" Type="Int32" />
+          <Property Name="RedZoneLat" Type="Double" />
+          <Property Name="RedZoneLon" Type="Double" />
+          <NavigationProperty Name="RedZone" Relationship="Self.FK__RedZoneCo__RedZo__52593CB8" FromRole="RedZoneCoordinates" ToRole="RedZone" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Organization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AllotedDrones" Relationship="Self.FK__AllotedDr__UserI__1AD3FDA4" FromRole="User" ToRole="AllotedDrones" />
+          <NavigationProperty Name="MobOfficer" Relationship="Self.FK__MobOffice__UserI__40058253" FromRole="User" ToRole="MobOfficer" />
+          <NavigationProperty Name="MobOperator" Relationship="Self.FK__MobOperat__UserI__3C34F16F" FromRole="User" ToRole="MobOperator" />
+          <NavigationProperty Name="QRF" Relationship="Self.FK__QRF__UserID_FK__5DCAEF64" FromRole="User" ToRole="QRF" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="VidID" />
+          </Key>
+          <Property Name="VidID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="VidDate" Type="DateTime" Precision="0" />
+          <Property Name="VidStartTime" Type="Time" Precision="7" />
+          <Property Name="VidEndTime" Type="Time" Precision="7" />
+          <Property Name="VidPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DroneID_FK" Type="Int32" />
+          <NavigationProperty Name="Drone" Relationship="Self.FK__Video__DroneID_F__2BFE89A6" FromRole="Video" ToRole="Drone" />
+          <NavigationProperty Name="Drone1" Relationship="Self.FK__Video__DroneID_F__44CA3770" FromRole="Video" ToRole="Drone" />
+          <NavigationProperty Name="Mob" Relationship="Self.FK__Video__MobID_FK__693CA210" FromRole="Video" ToRole="Mob" />
+        </EntityType>
+        <Association Name="FK__AllotedDr__Drone__19DFD96B">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="AllotedDrones" Type="Self.AllotedDrones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="AllotedDrones">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedDr__UserI__1AD3FDA4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="AllotedDrones" Type="Self.AllotedDrones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AllotedDrones">
+              <PropertyRef Name="UserID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__MobID__2739D489">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__MobID__29221CFB">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__MobID__41EDCAC5">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllotedRe__RedZo__59FA5E80">
+          <End Role="RedZone" Type="Self.RedZone" Multiplicity="0..1" />
+          <End Role="AllotedRedZones" Type="Self.AllotedRedZones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RedZone">
+              <PropertyRef Name="RedZoneID" />
+            </Principal>
+            <Dependent Role="AllotedRedZones">
+              <PropertyRef Name="RedZoneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Barrier__MobID_F__60A75C0F">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="Barrier" Type="Self.Barrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="Barrier">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Image__DroneID_F__2B0A656D">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Image__DroneID_F__43D61337">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Video__DroneID_F__2BFE89A6">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Video__DroneID_F__44CA3770">
+          <End Role="Drone" Type="Self.Drone" Multiplicity="0..1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drone">
+              <PropertyRef Name="DroneID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="DroneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Image__MobID_FK__66603565">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobCoords__MobID__625A9A57">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobCoords" Type="Self.MobCoords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobCoords">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOffice__MobId__40F9A68C">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobOfficer">
+              <PropertyRef Name="MobId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOperat__MobId__3D2915A8">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobOperator" Type="Self.MobOperator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobOperator">
+              <PropertyRef Name="MobId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobTimeli__MobID__2A164134">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobTimeline" Type="Self.MobTimeline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobTimeline">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PreDefCoo__MobID__05D8E0BE">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="PreDefCoords" Type="Self.PreDefCoords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="PreDefCoords">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Video__MobID_FK__693CA210">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOffice__UserI__40058253">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MobOfficer">
+              <PropertyRef Name="UserId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MobOperat__UserI__3C34F16F">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="MobOperator" Type="Self.MobOperator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MobOperator">
+              <PropertyRef Name="UserId_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QRF__UserID_FK__5DCAEF64">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="QRF" Type="Self.QRF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="QRF">
+              <PropertyRef Name="UserID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RedZoneCo__RedZo__52593CB8">
+          <End Role="RedZone" Type="Self.RedZone" Multiplicity="0..1" />
+          <End Role="RedZoneCoordinates" Type="Self.RedZoneCoordinates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RedZone">
+              <PropertyRef Name="RedZoneID" />
+            </Principal>
+            <Dependent Role="RedZoneCoordinates">
+              <PropertyRef Name="RedZoneID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FYP_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AllotedDrones" EntityType="Self.AllotedDrones" />
+          <EntitySet Name="AllotedRedZones" EntityType="Self.AllotedRedZones" />
+          <EntitySet Name="Barrier" EntityType="Self.Barrier" />
+          <EntitySet Name="Drone" EntityType="Self.Drone" />
+          <EntitySet Name="Image" EntityType="Self.Image" />
+          <EntitySet Name="Mob" EntityType="Self.Mob" />
+          <EntitySet Name="MobCoords" EntityType="Self.MobCoords" />
+          <EntitySet Name="MobOfficer" EntityType="Self.MobOfficer" />
+          <EntitySet Name="MobOperator" EntityType="Self.MobOperator" />
+          <EntitySet Name="MobTimeline" EntityType="Self.MobTimeline" />
+          <EntitySet Name="PreDefCoords" EntityType="Self.PreDefCoords" />
+          <EntitySet Name="QRF" EntityType="Self.QRF" />
+          <EntitySet Name="RedZone" EntityType="Self.RedZone" />
+          <EntitySet Name="RedZoneCoordinates" EntityType="Self.RedZoneCoordinates" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Video" EntityType="Self.Video" />
+          <AssociationSet Name="FK__AllotedDr__Drone__19DFD96B" Association="Self.FK__AllotedDr__Drone__19DFD96B">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="AllotedDrones" EntitySet="AllotedDrones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedDr__UserI__1AD3FDA4" Association="Self.FK__AllotedDr__UserI__1AD3FDA4">
+            <End Role="User" EntitySet="User" />
+            <End Role="AllotedDrones" EntitySet="AllotedDrones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__MobID__2739D489" Association="Self.FK__AllotedRe__MobID__2739D489">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__MobID__29221CFB" Association="Self.FK__AllotedRe__MobID__29221CFB">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__MobID__41EDCAC5" Association="Self.FK__AllotedRe__MobID__41EDCAC5">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllotedRe__RedZo__59FA5E80" Association="Self.FK__AllotedRe__RedZo__59FA5E80">
+            <End Role="RedZone" EntitySet="RedZone" />
+            <End Role="AllotedRedZones" EntitySet="AllotedRedZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Barrier__MobID_F__60A75C0F" Association="Self.FK__Barrier__MobID_F__60A75C0F">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="Barrier" EntitySet="Barrier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Image__DroneID_F__2B0A656D" Association="Self.FK__Image__DroneID_F__2B0A656D">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Image__DroneID_F__43D61337" Association="Self.FK__Image__DroneID_F__43D61337">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Video__DroneID_F__2BFE89A6" Association="Self.FK__Video__DroneID_F__2BFE89A6">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Video__DroneID_F__44CA3770" Association="Self.FK__Video__DroneID_F__44CA3770">
+            <End Role="Drone" EntitySet="Drone" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Image__MobID_FK__66603565" Association="Self.FK__Image__MobID_FK__66603565">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobCoords__MobID__625A9A57" Association="Self.FK__MobCoords__MobID__625A9A57">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobCoords" EntitySet="MobCoords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOffice__MobId__40F9A68C" Association="Self.FK__MobOffice__MobId__40F9A68C">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobOfficer" EntitySet="MobOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOperat__MobId__3D2915A8" Association="Self.FK__MobOperat__MobId__3D2915A8">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobOperator" EntitySet="MobOperator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobTimeli__MobID__2A164134" Association="Self.FK__MobTimeli__MobID__2A164134">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobTimeline" EntitySet="MobTimeline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PreDefCoo__MobID__05D8E0BE" Association="Self.FK__PreDefCoo__MobID__05D8E0BE">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="PreDefCoords" EntitySet="PreDefCoords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Video__MobID_FK__693CA210" Association="Self.FK__Video__MobID_FK__693CA210">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOffice__UserI__40058253" Association="Self.FK__MobOffice__UserI__40058253">
+            <End Role="User" EntitySet="User" />
+            <End Role="MobOfficer" EntitySet="MobOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MobOperat__UserI__3C34F16F" Association="Self.FK__MobOperat__UserI__3C34F16F">
+            <End Role="User" EntitySet="User" />
+            <End Role="MobOperator" EntitySet="MobOperator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QRF__UserID_FK__5DCAEF64" Association="Self.FK__QRF__UserID_FK__5DCAEF64">
+            <End Role="User" EntitySet="User" />
+            <End Role="QRF" EntitySet="QRF" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RedZoneCo__RedZo__52593CB8" Association="Self.FK__RedZoneCo__RedZo__52593CB8">
+            <End Role="RedZone" EntitySet="RedZone" />
+            <End Role="RedZoneCoordinates" EntitySet="RedZoneCoordinates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FYP_DBModelStoreContainer" CdmEntityContainer="FYP_DBEntities">
+          <EntitySetMapping Name="AllotedDrones">
+            <EntityTypeMapping TypeName="FYP_DBModel.AllotedDrones">
+              <MappingFragment StoreEntitySet="AllotedDrones">
+                <ScalarProperty Name="AllocationID" ColumnName="AllocationID" />
+                <ScalarProperty Name="DroneID_FK" ColumnName="DroneID_FK" />
+                <ScalarProperty Name="UserID_FK" ColumnName="UserID_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllotedRedZones">
+            <EntityTypeMapping TypeName="FYP_DBModel.AllotedRedZones">
+              <MappingFragment StoreEntitySet="AllotedRedZones">
+                <ScalarProperty Name="AllotmentID" ColumnName="AllotmentID" />
+                <ScalarProperty Name="RedZoneID_FK" ColumnName="RedZoneID_FK" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barrier">
+            <EntityTypeMapping TypeName="FYP_DBModel.Barrier">
+              <MappingFragment StoreEntitySet="Barrier">
+                <ScalarProperty Name="BarrierID" ColumnName="BarrierID" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="BarrierLat" ColumnName="BarrierLat" />
+                <ScalarProperty Name="BarrierLon" ColumnName="BarrierLon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drone">
+            <EntityTypeMapping TypeName="FYP_DBModel.Drone">
+              <MappingFragment StoreEntitySet="Drone">
+                <ScalarProperty Name="DroneID" ColumnName="DroneID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Battery" ColumnName="Battery" />
+                <ScalarProperty Name="IsCharged" ColumnName="IsCharged" />
+                <ScalarProperty Name="BufferSizeMb" ColumnName="BufferSizeMb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Image">
+            <EntityTypeMapping TypeName="FYP_DBModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="ImgID" ColumnName="ImgID" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="ImgDateTime" ColumnName="ImgDateTime" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="ImgLat" ColumnName="ImgLat" />
+                <ScalarProperty Name="ImgLon" ColumnName="ImgLon" />
+                <ScalarProperty Name="DroneID_FK" ColumnName="DroneID_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mob">
+            <EntityTypeMapping TypeName="FYP_DBModel.Mob">
+              <MappingFragment StoreEntitySet="Mob">
+                <ScalarProperty Name="MobID" ColumnName="MobID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ProputedStrength" ColumnName="ProputedStrength" />
+                <ScalarProperty Name="ActualStrength" ColumnName="ActualStrength" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MobStartLat" ColumnName="MobStartLat" />
+                <ScalarProperty Name="MobStartLon" ColumnName="MobStartLon" />
+                <ScalarProperty Name="MobEndLat" ColumnName="MobEndLat" />
+                <ScalarProperty Name="MobEndLon" ColumnName="MobEndLon" />
+                <ScalarProperty Name="MobType" ColumnName="MobType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobCoords">
+            <EntityTypeMapping TypeName="FYP_DBModel.MobCoords">
+              <MappingFragment StoreEntitySet="MobCoords">
+                <ScalarProperty Name="MobID" ColumnName="MobID" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="MobLat" ColumnName="MobLat" />
+                <ScalarProperty Name="MobLon" ColumnName="MobLon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobOfficer">
+            <EntityTypeMapping TypeName="FYP_DBModel.MobOfficer">
+              <MappingFragment StoreEntitySet="MobOfficer">
+                <ScalarProperty Name="moId" ColumnName="moId" />
+                <ScalarProperty Name="UserId_FK" ColumnName="UserId_FK" />
+                <ScalarProperty Name="MobId_FK" ColumnName="MobId_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobOperator">
+            <EntityTypeMapping TypeName="FYP_DBModel.MobOperator">
+              <MappingFragment StoreEntitySet="MobOperator">
+                <ScalarProperty Name="moId" ColumnName="moId" />
+                <ScalarProperty Name="UserId_FK" ColumnName="UserId_FK" />
+                <ScalarProperty Name="MobId_FK" ColumnName="MobId_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobTimeline">
+            <EntityTypeMapping TypeName="FYP_DBModel.MobTimeline">
+              <MappingFragment StoreEntitySet="MobTimeline">
+                <ScalarProperty Name="TimelineID" ColumnName="TimelineID" />
+                <ScalarProperty Name="MobStrength" ColumnName="MobStrength" />
+                <ScalarProperty Name="TimelineLon" ColumnName="TimelineLon" />
+                <ScalarProperty Name="TimelineLat" ColumnName="TimelineLat" />
+                <ScalarProperty Name="TimelineDate" ColumnName="TimelineDate" />
+                <ScalarProperty Name="TimelineTime" ColumnName="TimelineTime" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="DroneID_FK" ColumnName="DroneID_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreDefCoords">
+            <EntityTypeMapping TypeName="FYP_DBModel.PreDefCoords">
+              <MappingFragment StoreEntitySet="PreDefCoords">
+                <ScalarProperty Name="PreDefID" ColumnName="PreDefID" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="PreDefLat" ColumnName="PreDefLat" />
+                <ScalarProperty Name="PreDefLon" ColumnName="PreDefLon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QRF">
+            <EntityTypeMapping TypeName="FYP_DBModel.QRF">
+              <MappingFragment StoreEntitySet="QRF">
+                <ScalarProperty Name="QrfId" ColumnName="QrfId" />
+                <ScalarProperty Name="UserID_FK" ColumnName="UserID_FK" />
+                <ScalarProperty Name="QrfStrength" ColumnName="QrfStrength" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="QrfLocLat" ColumnName="QrfLocLat" />
+                <ScalarProperty Name="QrfLocLon" ColumnName="QrfLocLon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RedZone">
+            <EntityTypeMapping TypeName="FYP_DBModel.RedZone">
+              <MappingFragment StoreEntitySet="RedZone">
+                <ScalarProperty Name="RedZoneID" ColumnName="RedZoneID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RedZoneCoordinates">
+            <EntityTypeMapping TypeName="FYP_DBModel.RedZoneCoordinates">
+              <MappingFragment StoreEntitySet="RedZoneCoordinates">
+                <ScalarProperty Name="CoordinateID" ColumnName="CoordinateID" />
+                <ScalarProperty Name="RedZoneID_FK" ColumnName="RedZoneID_FK" />
+                <ScalarProperty Name="RedZoneLat" ColumnName="RedZoneLat" />
+                <ScalarProperty Name="RedZoneLon" ColumnName="RedZoneLon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FYP_DBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="FYP_DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Video">
+            <EntityTypeMapping TypeName="FYP_DBModel.Video">
+              <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="VidID" ColumnName="VidID" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="VidDate" ColumnName="VidDate" />
+                <ScalarProperty Name="VidStartTime" ColumnName="VidStartTime" />
+                <ScalarProperty Name="VidEndTime" ColumnName="VidEndTime" />
+                <ScalarProperty Name="VidPath" ColumnName="VidPath" />
+                <ScalarProperty Name="DroneID_FK" ColumnName="DroneID_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
