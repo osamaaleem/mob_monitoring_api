@@ -27,6 +27,7 @@ namespace mob_monitoring_api.Models
             this.MobTimeline = new HashSet<MobTimeline>();
             this.PreDefCoords = new HashSet<PreDefCoords>();
             this.Video = new HashSet<Video>();
+            this.MobCoords = new HashSet<MobCoords>();
         }
     
         public int MobID { get; set; }
@@ -62,5 +63,7 @@ namespace mob_monitoring_api.Models
         public virtual ICollection<PreDefCoords> PreDefCoords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Video> Video { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MobCoords> MobCoords { get; set; }
     }
 }

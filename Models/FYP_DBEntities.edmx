@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FYP_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FYP_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AllotedDrones">
           <Key>
             <PropertyRef Name="AllocationID" />
@@ -69,6 +69,15 @@
           <Property Name="MobEndLat" Type="float" />
           <Property Name="MobEndLon" Type="float" />
           <Property Name="MobType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MobCoords">
+          <Key>
+            <PropertyRef Name="MobID" />
+          </Key>
+          <Property Name="MobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobID_FK" Type="int" />
+          <Property Name="MobLat" Type="float" />
+          <Property Name="MobLon" Type="float" />
         </EntityType>
         <EntityType Name="MobOfficer">
           <Key>
@@ -289,6 +298,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__MobCoords__MobID__625A9A57">
+          <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
+          <End Role="MobCoords" Type="Self.MobCoords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobCoords">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__MobOffice__MobId__40F9A68C">
           <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
           <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
@@ -428,6 +449,7 @@
           <EntitySet Name="Drone" EntityType="Self.Drone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mob" EntityType="Self.Mob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobCoords" EntityType="Self.MobCoords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobOfficer" EntityType="Self.MobOfficer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobOperator" EntityType="Self.MobOperator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobTimeline" EntityType="Self.MobTimeline" Schema="dbo" store:Type="Tables" />
@@ -478,6 +500,10 @@
             <End Role="Mob" EntitySet="Mob" />
             <End Role="Image" EntitySet="Image" />
           </AssociationSet>
+          <AssociationSet Name="FK__MobCoords__MobID__625A9A57" Association="Self.FK__MobCoords__MobID__625A9A57">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobCoords" EntitySet="MobCoords" />
+          </AssociationSet>
           <AssociationSet Name="FK__MobOffice__MobId__40F9A68C" Association="Self.FK__MobOffice__MobId__40F9A68C">
             <End Role="Mob" EntitySet="Mob" />
             <End Role="MobOfficer" EntitySet="MobOfficer" />
@@ -523,8 +549,7 @@
             <End Role="Video" EntitySet="Video" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FYP_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -617,6 +642,7 @@
           <NavigationProperty Name="MobTimeline" Relationship="Self.FK__MobTimeli__MobID__2A164134" FromRole="Mob" ToRole="MobTimeline" />
           <NavigationProperty Name="PreDefCoords" Relationship="Self.FK__PreDefCoo__MobID__05D8E0BE" FromRole="Mob" ToRole="PreDefCoords" />
           <NavigationProperty Name="Video" Relationship="Self.FK__Video__MobID_FK__693CA210" FromRole="Mob" ToRole="Video" />
+          <NavigationProperty Name="MobCoords" Relationship="FYP_DBModel.FK__MobCoords__MobID__625A9A57" FromRole="Mob" ToRole="MobCoords" />
         </EntityType>
         <EntityType Name="MobOfficer">
           <Key>
@@ -1087,7 +1113,34 @@
             <End Role="RedZone" EntitySet="RedZone" />
             <End Role="RedZoneCoordinates" EntitySet="RedZoneCoordinates" />
           </AssociationSet>
+          <EntitySet Name="MobCoords" EntityType="FYP_DBModel.MobCoords" />
+          <AssociationSet Name="FK__MobCoords__MobID__625A9A57" Association="FYP_DBModel.FK__MobCoords__MobID__625A9A57">
+            <End Role="Mob" EntitySet="Mob" />
+            <End Role="MobCoords" EntitySet="MobCoords" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="MobCoords">
+          <Key>
+            <PropertyRef Name="MobID" />
+          </Key>
+          <Property Name="MobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobID_FK" Type="Int32" />
+          <Property Name="MobLat" Type="Double" />
+          <Property Name="MobLon" Type="Double" />
+          <NavigationProperty Name="Mob" Relationship="FYP_DBModel.FK__MobCoords__MobID__625A9A57" FromRole="MobCoords" ToRole="Mob" />
+        </EntityType>
+        <Association Name="FK__MobCoords__MobID__625A9A57">
+          <End Type="FYP_DBModel.Mob" Role="Mob" Multiplicity="0..1" />
+          <End Type="FYP_DBModel.MobCoords" Role="MobCoords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mob">
+              <PropertyRef Name="MobID" />
+            </Principal>
+            <Dependent Role="MobCoords">
+              <PropertyRef Name="MobID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1271,6 +1324,16 @@
                 <ScalarProperty Name="VidEndTime" ColumnName="VidEndTime" />
                 <ScalarProperty Name="VidPath" ColumnName="VidPath" />
                 <ScalarProperty Name="DroneID_FK" ColumnName="DroneID_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobCoords">
+            <EntityTypeMapping TypeName="FYP_DBModel.MobCoords">
+              <MappingFragment StoreEntitySet="MobCoords">
+                <ScalarProperty Name="MobLon" ColumnName="MobLon" />
+                <ScalarProperty Name="MobLat" ColumnName="MobLat" />
+                <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
+                <ScalarProperty Name="MobID" ColumnName="MobID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

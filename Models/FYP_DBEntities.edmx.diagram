@@ -42,6 +42,8 @@
         <AssociationConnector Association="FYP_DBModel.FK__MobOperat__UserI__3C34F16F" ManuallyRouted="false" />
         <AssociationConnector Association="FYP_DBModel.FK__QRF__UserID_FK__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="FYP_DBModel.FK__RedZoneCo__RedZo__52593CB8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FYP_DBModel.MobCoords" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="FYP_DBModel.FK__MobCoords__MobID__625A9A57" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

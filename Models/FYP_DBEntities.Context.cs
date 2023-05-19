@@ -18,7 +18,6 @@ namespace mob_monitoring_api.Models
         public FYP_DBEntities()
             : base("name=FYP_DBEntities")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -42,5 +41,6 @@ namespace mob_monitoring_api.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Video> Video { get; set; }
+        public virtual DbSet<MobCoords> MobCoords { get; set; }
     }
 }
