@@ -19,6 +19,10 @@ namespace mob_monitoring_api.Models
             : base("name=FYP_DBEntities")
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            Configuration.ProxyCreationEnabled = false;
+>>>>>>> parent of d95e63f (deleted-db-entities)
 =======
             Configuration.ProxyCreationEnabled = false;
 >>>>>>> parent of d95e63f (deleted-db-entities)
@@ -36,7 +40,10 @@ namespace mob_monitoring_api.Models
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Mob> Mob { get; set; }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public virtual DbSet<MobCoords> MobCoords { get; set; }
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
 =======
 >>>>>>> parent of d95e63f (deleted-db-entities)
         public virtual DbSet<MobOfficer> MobOfficer { get; set; }

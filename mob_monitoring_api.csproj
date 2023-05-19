@@ -242,7 +242,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
     <Compile Include="Models\AllotedDrones.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
@@ -255,6 +258,9 @@
     <Compile Include="Models\Drone.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+>>>>>>> parent of d95e63f (deleted-db-entities)
+=======
 >>>>>>> parent of d95e63f (deleted-db-entities)
     <Compile Include="Models\FYP_DBEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -272,6 +278,12 @@
       <DependentUpon>FYP_DBEntities.edmx</DependentUpon>
     </Compile>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+>>>>>>> parent of d95e63f (deleted-db-entities)
 =======
     <Compile Include="Models\Image.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>

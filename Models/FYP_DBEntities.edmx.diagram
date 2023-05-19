@@ -5,6 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Diagram DiagramId="b1b6e7b124244f85b61d1b4090c5a1f5" Name="Diagram1">
         <EntityTypeShape EntityType="FYP_DBModel.AllotedDrones" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP_DBModel.AllotedRedZones" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
@@ -24,6 +25,8 @@
         <EntityTypeShape EntityType="FYP_DBModel.User" Width="1.5" PointX="3.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP_DBModel.Video" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
 =======
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
       <Diagram DiagramId="7dc96ea4a1d84210b8c5b1738c87df21" Name="Diagram1">
         <EntityTypeShape EntityType="FYP_DBModel.AllotedDrones" Width="1.5" PointX="9" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP_DBModel.AllotedRedZones" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
@@ -41,6 +44,9 @@
         <EntityTypeShape EntityType="FYP_DBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP_DBModel.User" Width="1.5" PointX="3.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP_DBModel.Video" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+<<<<<<< HEAD
+>>>>>>> parent of d95e63f (deleted-db-entities)
+=======
 >>>>>>> parent of d95e63f (deleted-db-entities)
         <AssociationConnector Association="FYP_DBModel.FK__AllotedDr__Drone__19DFD96B" ManuallyRouted="false" />
         <AssociationConnector Association="FYP_DBModel.FK__AllotedDr__UserI__1AD3FDA4" ManuallyRouted="false" />
@@ -55,7 +61,10 @@
         <AssociationConnector Association="FYP_DBModel.FK__Video__DroneID_F__44CA3770" ManuallyRouted="false" />
         <AssociationConnector Association="FYP_DBModel.FK__Image__MobID_FK__66603565" ManuallyRouted="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <AssociationConnector Association="FYP_DBModel.FK__MobCoords__MobID__625A9A57" ManuallyRouted="false" />
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
 =======
 >>>>>>> parent of d95e63f (deleted-db-entities)
         <AssociationConnector Association="FYP_DBModel.FK__MobOffice__MobId__40F9A68C" ManuallyRouted="false" />
