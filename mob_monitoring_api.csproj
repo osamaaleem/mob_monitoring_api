@@ -293,9 +293,6 @@
     <Compile Include="Models\Mob.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MobCoords.cs">
-      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\MobOfficer.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
