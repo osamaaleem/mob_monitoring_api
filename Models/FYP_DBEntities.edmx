@@ -70,6 +70,7 @@
           <Property Name="MobEndLon" Type="float" />
           <Property Name="MobType" Type="varchar" MaxLength="50" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="MobCoords">
           <Key>
             <PropertyRef Name="MobID" />
@@ -79,6 +80,8 @@
           <Property Name="MobLat" Type="float" />
           <Property Name="MobLon" Type="float" />
         </EntityType>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
         <EntityType Name="MobOfficer">
           <Key>
             <PropertyRef Name="moId" />
@@ -298,6 +301,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK__MobCoords__MobID__625A9A57">
           <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
           <End Role="MobCoords" Type="Self.MobCoords" Multiplicity="*" />
@@ -310,6 +314,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
         <Association Name="FK__MobOffice__MobId__40F9A68C">
           <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
           <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
@@ -449,7 +455,10 @@
           <EntitySet Name="Drone" EntityType="Self.Drone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mob" EntityType="Self.Mob" Schema="dbo" store:Type="Tables" />
+<<<<<<< HEAD
           <EntitySet Name="MobCoords" EntityType="Self.MobCoords" Schema="dbo" store:Type="Tables" />
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
           <EntitySet Name="MobOfficer" EntityType="Self.MobOfficer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobOperator" EntityType="Self.MobOperator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobTimeline" EntityType="Self.MobTimeline" Schema="dbo" store:Type="Tables" />
@@ -500,10 +509,13 @@
             <End Role="Mob" EntitySet="Mob" />
             <End Role="Image" EntitySet="Image" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK__MobCoords__MobID__625A9A57" Association="Self.FK__MobCoords__MobID__625A9A57">
             <End Role="Mob" EntitySet="Mob" />
             <End Role="MobCoords" EntitySet="MobCoords" />
           </AssociationSet>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
           <AssociationSet Name="FK__MobOffice__MobId__40F9A68C" Association="Self.FK__MobOffice__MobId__40F9A68C">
             <End Role="Mob" EntitySet="Mob" />
             <End Role="MobOfficer" EntitySet="MobOfficer" />
@@ -638,13 +650,17 @@
           <NavigationProperty Name="AllotedRedZones2" Relationship="Self.FK__AllotedRe__MobID__41EDCAC5" FromRole="Mob" ToRole="AllotedRedZones" />
           <NavigationProperty Name="Barrier" Relationship="Self.FK__Barrier__MobID_F__60A75C0F" FromRole="Mob" ToRole="Barrier" />
           <NavigationProperty Name="Image" Relationship="Self.FK__Image__MobID_FK__66603565" FromRole="Mob" ToRole="Image" />
+<<<<<<< HEAD
           <NavigationProperty Name="MobCoords" Relationship="Self.FK__MobCoords__MobID__625A9A57" FromRole="Mob" ToRole="MobCoords" />
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
           <NavigationProperty Name="MobOfficer" Relationship="Self.FK__MobOffice__MobId__40F9A68C" FromRole="Mob" ToRole="MobOfficer" />
           <NavigationProperty Name="MobOperator" Relationship="Self.FK__MobOperat__MobId__3D2915A8" FromRole="Mob" ToRole="MobOperator" />
           <NavigationProperty Name="MobTimeline" Relationship="Self.FK__MobTimeli__MobID__2A164134" FromRole="Mob" ToRole="MobTimeline" />
           <NavigationProperty Name="PreDefCoords" Relationship="Self.FK__PreDefCoo__MobID__05D8E0BE" FromRole="Mob" ToRole="PreDefCoords" />
           <NavigationProperty Name="Video" Relationship="Self.FK__Video__MobID_FK__693CA210" FromRole="Mob" ToRole="Video" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="MobCoords">
           <Key>
             <PropertyRef Name="MobID" />
@@ -655,6 +671,8 @@
           <Property Name="MobLon" Type="Double" />
           <NavigationProperty Name="Mob" Relationship="Self.FK__MobCoords__MobID__625A9A57" FromRole="MobCoords" ToRole="Mob" />
         </EntityType>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
         <EntityType Name="MobOfficer">
           <Key>
             <PropertyRef Name="moId" />
@@ -915,6 +933,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK__MobCoords__MobID__625A9A57">
           <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
           <End Role="MobCoords" Type="Self.MobCoords" Multiplicity="*" />
@@ -927,6 +946,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
         <Association Name="FK__MobOffice__MobId__40F9A68C">
           <End Role="Mob" Type="Self.Mob" Multiplicity="0..1" />
           <End Role="MobOfficer" Type="Self.MobOfficer" Multiplicity="*" />
@@ -1042,7 +1063,10 @@
           <EntitySet Name="Drone" EntityType="Self.Drone" />
           <EntitySet Name="Image" EntityType="Self.Image" />
           <EntitySet Name="Mob" EntityType="Self.Mob" />
+<<<<<<< HEAD
           <EntitySet Name="MobCoords" EntityType="Self.MobCoords" />
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
           <EntitySet Name="MobOfficer" EntityType="Self.MobOfficer" />
           <EntitySet Name="MobOperator" EntityType="Self.MobOperator" />
           <EntitySet Name="MobTimeline" EntityType="Self.MobTimeline" />
@@ -1101,10 +1125,13 @@
             <End Role="Mob" EntitySet="Mob" />
             <End Role="Image" EntitySet="Image" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK__MobCoords__MobID__625A9A57" Association="Self.FK__MobCoords__MobID__625A9A57">
             <End Role="Mob" EntitySet="Mob" />
             <End Role="MobCoords" EntitySet="MobCoords" />
           </AssociationSet>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
           <AssociationSet Name="FK__MobOffice__MobId__40F9A68C" Association="Self.FK__MobOffice__MobId__40F9A68C">
             <End Role="Mob" EntitySet="Mob" />
             <End Role="MobOfficer" EntitySet="MobOfficer" />
@@ -1219,6 +1246,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="MobCoords">
             <EntityTypeMapping TypeName="FYP_DBModel.MobCoords">
               <MappingFragment StoreEntitySet="MobCoords">
@@ -1229,6 +1257,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
           <EntitySetMapping Name="MobOfficer">
             <EntityTypeMapping TypeName="FYP_DBModel.MobOfficer">
               <MappingFragment StoreEntitySet="MobOfficer">

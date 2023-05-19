@@ -241,6 +241,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Models\AllotedDrones.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllotedRedZones.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Barrier.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Drone.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+>>>>>>> parent of d95e63f (deleted-db-entities)
     <Compile Include="Models\FYP_DBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -256,7 +271,46 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FYP_DBEntities.edmx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+>>>>>>> parent of d95e63f (deleted-db-entities)
     <Compile Include="Models\Management.cs" />
+    <Compile Include="Models\Mob.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobOfficer.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobOperator.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobTimeline.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PreDefCoords.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QRF.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RedZone.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RedZoneCoordinates.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Video.cs">
+      <DependentUpon>FYP_DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

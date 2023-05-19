@@ -18,6 +18,10 @@ namespace mob_monitoring_api.Models
         public FYP_DBEntities()
             : base("name=FYP_DBEntities")
         {
+<<<<<<< HEAD
+=======
+            Configuration.ProxyCreationEnabled = false;
+>>>>>>> parent of d95e63f (deleted-db-entities)
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,7 +35,10 @@ namespace mob_monitoring_api.Models
         public virtual DbSet<Drone> Drone { get; set; }
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Mob> Mob { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<MobCoords> MobCoords { get; set; }
+=======
+>>>>>>> parent of d95e63f (deleted-db-entities)
         public virtual DbSet<MobOfficer> MobOfficer { get; set; }
         public virtual DbSet<MobOperator> MobOperator { get; set; }
         public virtual DbSet<MobTimeline> MobTimeline { get; set; }

@@ -48,7 +48,7 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                var redZoneName = db.RedZone.Where(x => x.Name == name).Select(x => x.RedZoneID).FirstOrDefault();
+                var redZoneName = db.RedZone.Where(x => x.Name == name).Select(x => x.RedZoneID);
                 return Request.CreateResponse(HttpStatusCode.OK, redZoneName);
             }
             catch (Exception)
@@ -98,16 +98,8 @@ namespace mob_monitoring_api.Controllers
         [HttpPost]
         public HttpResponseMessage AddRedZone(RedZone r)
         {
-            try
-            {
-                db.RedZone.Add(r);
-                db.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
-            catch
-            {
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
+            db.RedZone.Add(r);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
         [HttpPost]
         public HttpResponseMessage DeleteZone(int id)

@@ -110,10 +110,6 @@ namespace mob_monitoring_api.Controllers
             List<Mob> mNullList = removeNullValues(mobs);
             return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         }
-        public HttpResponseMessage GetMobCoordsById(int id)
-        {
-            var mobCoords = db.Mob.Where(x => x.MobID == id).Select(x => new { x.Latitude, x.Longitude }).FirstOrDefault();
-        }
         public HttpResponseMessage UpdateMobs(Mob m)
         {
             Mob mob = db.Mob.Where(x => x.MobID == m.MobID).FirstOrDefault();
