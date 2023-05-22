@@ -69,6 +69,7 @@ namespace mob_monitoring_api.Controllers
             if (user != null)
             {
                 db.User.Remove(user);
+                db.SaveChanges();
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
