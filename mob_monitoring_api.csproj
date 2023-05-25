@@ -204,6 +204,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DronesController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\MobCoordController.cs" />
     <Compile Include="Controllers\MobDetailsController.cs" />
     <Compile Include="Controllers\MobsController.cs" />
     <Compile Include="Controllers\RedZonesController.cs" />
