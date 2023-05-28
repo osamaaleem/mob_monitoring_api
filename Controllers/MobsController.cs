@@ -11,6 +11,7 @@ using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using Microsoft.Ajax.Utilities;
 using mob_monitoring_api.Models;
 
 namespace mob_monitoring_api.Controllers
@@ -116,6 +117,65 @@ namespace mob_monitoring_api.Controllers
             mob = m;
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpGet]
+        public HttpResponseMessage GetMobsWithoutOperators()
+        {
+            try
+            {
+                var mobFKeys = db.MobOperator.Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => !mobFKeys.Contains(x.MobID)).ToList();
+                List<Mob> mNullList = removeNullValues(mobs);
+                return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetMobsWithOperators()
+        {
+            try
+            {
+                var mobFKeys = db.MobOperator.Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => mobFKeys.Contains(x.MobID)).ToList();
+                List<Mob> mNullList = removeNullValues(mobs);
+                return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        public HttpResponseMessage GetMobsWithoutOfficers()
+        {
+            try
+            {
+                var mobFKeys = db.MobOfficer.Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => !mobFKeys.Contains(x.MobID)).ToList();
+                List<Mob> mNullList = removeNullValues(mobs);
+                return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetMobsWithOfficer()
+        {
+            try
+            {
+                var mobFKeys = db.MobOfficer.Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => mobFKeys.Contains(x.MobID)).ToList();
+                List<Mob> mNullList = removeNullValues(mobs);
+                return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
         }
         //[HttpGet]
         //public HttpResponseMessage AssignedUser()
