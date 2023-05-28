@@ -39,7 +39,7 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                var operators = db.User.Where(x => x.Role == "Operator").Select(x => x.Name).ToList();
+                var operators = db.User.Where(x => x.Role == "Operator").ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, operators);
             }
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
@@ -51,7 +51,7 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                var officers = db.User.Where(x => x.Role == "Officer").Select(x => x.Name).ToList();
+                var officers = db.User.Where(x => x.Role == "Officer").ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, officers);
             }
             catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
