@@ -388,6 +388,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\Video.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>

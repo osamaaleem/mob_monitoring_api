@@ -19,6 +19,7 @@ namespace mob_monitoring_api.Models
             : base("name=FYP_DBEntities")
         {
             Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

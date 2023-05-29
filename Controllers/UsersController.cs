@@ -35,7 +35,17 @@ namespace mob_monitoring_api.Controllers
                 User u = db.User.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
                 if (u != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, u);
+                    UserModel us = new UserModel();
+                    us.UserID = u.UserID;
+                    us.Name = u.Name;
+                    us.Email = u.Email;
+                
+                    us.Password = u.Password;
+
+                    us.Role = u.Role;
+                    us.Organization = u.Organization;
+
+                    return Request.CreateResponse(HttpStatusCode.OK, us);
                     /*role = u.ToString();
                     string message = $"{{\"message\": \"{role}\"}}";
                     HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
