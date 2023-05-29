@@ -31,5 +31,18 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
+        [HttpGet]
+        public HttpResponseMessage getCoord(int Mobid)
+        {
+            try
+            {
+                var coords = db.MobCoords.Where(x => x.MobID_FK == Mobid).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, coords);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
     }
 }

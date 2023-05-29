@@ -83,6 +83,28 @@ namespace mob_monitoring_api.Controllers
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+        [HttpGet]
+        public HttpResponseMessage getMobByOfficerId(int offId)
+        {
+            try
+            {
+                int mobId = db.MobOfficer.Where(x => x.UserId_FK == ofId).Select(x => x.MobId_FK).toList();
+                var mobs = db.Mob.Where(x => x.MobID == mobId).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            }
+            catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+        }
+        [HttpGet]
+        public HttpResponseMessage getMobByOperatorId(int opId)
+        {
+            try
+            {
+                int mobId = db.MobOperator.Where(x => x.UserId_FK == opId).Select(x => x.MobId_FK).toList();
+                var mobs = db.Mob.Where(x => x.MobID == mobId).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            }
+            catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+        }
 
         [HttpPost]
         public HttpResponseMessage AllocateMobToOfficer(int mobId, int userId)
@@ -95,5 +117,6 @@ namespace mob_monitoring_api.Controllers
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+        
     }
 }

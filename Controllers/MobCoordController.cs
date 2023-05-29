@@ -1,4 +1,5 @@
-﻿using mob_monitoring_api.Models;
+﻿using Microsoft.Ajax.Utilities;
+using mob_monitoring_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,34 @@ namespace mob_monitoring_api.Controllers
             catch
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetMobsByOfficerId(int id)
+        {
+            try
+            {
+                var mobIds = db.MobOfficer.Where(x => x.UserId_FK == id).Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => mobIds.Contains(x.MobID)).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetMobsByOperatorId(int id)
+        {
+            try
+            {
+                var mobIds = db.MobOperator.Where(x => x.UserId_FK == id).Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => mobIds.Contains(x.MobID)).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, mobs);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
         [HttpGet]
