@@ -43,6 +43,22 @@ namespace mob_monitoring_api.Controllers
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
+        [HttpPost]
+        public HttpResponseMessage UpdateRedzone(RedZone r)
+        {
+            try
+            {
+                var redZone = db.RedZone.Where(x => x.RedZoneID == r.RedZoneID).FirstOrDefault();
+                redZone.Name = r.Name;
+                redZone.IsActive = r.IsActive;
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
         [HttpGet]
         public HttpResponseMessage GetRedZoneIdByName(String name) 
         {
@@ -52,6 +68,22 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, redZoneName);
             }
             catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpPost]
+        public HttpResponseMessage UpdateRedzoneCoords(List<RedZoneCoordinates> rcList,int id)
+        {
+            try
+            {
+                var redZone = db.RedZone.Where(x => x.RedZoneID == id).FirstOrDefault();
+                db.RedZoneCoordinates.RemoveRange(db.RedZoneCoordinates.Where(x => x.RedZoneID_FK == id));
+                db.RedZoneCoordinates.AddRange(rcList);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }

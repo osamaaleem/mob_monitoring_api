@@ -44,10 +44,17 @@ namespace mob_monitoring_api.Controllers
         [HttpPost]
         public HttpResponseMessage DeleteMob(int id)
         {
-            var m = db.Mob.Where(x => x.MobID == id).FirstOrDefault();
-            db.Mob.Remove(m); 
-            db.SaveChanges();
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                var m = db.Mob.Where(x => x.MobID == id).FirstOrDefault();
+                db.Mob.Remove(m);
+                db.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
         }
         [HttpGet]
         public HttpResponseMessage GetMob(int id)
