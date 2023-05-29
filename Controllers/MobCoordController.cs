@@ -28,6 +28,45 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
         }
+        [HttpGet]
+        public HttpResponseMessage GetLatestCoord(int mobId)
+        {
+            try
+            {
+                var mCoords = db.MobCoords.Where(x => x.MobID_FK == mobId).OrderByDescending(x => x.MobCoordID).FirstOrDefault();
+                return Request.CreateResponse(HttpStatusCode.OK, mCoords);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+        }
+        public HttpResponseMessage GetMobActualCoords(int mobID)
+        {
+            try
+            {
+                var mCoords = db.MobCoords.Where(x => x.MobID_FK == mobID).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, mCoords);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+        }
+        [HttpPost]
+        public HttpResponseMessage AddActualCoords(MobCoords mc)
+        {
+            try
+            {
+                db.MobCoords.Add(mc);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
         [HttpPost]
         public HttpResponseMessage AddMobCoords(List<PreDefCoords> mobCoords)
         {

@@ -252,6 +252,22 @@ namespace mob_monitoring_api.Controllers
         //    List<Mob> mNullList = removeNullValues(mList);
         //    return Request.CreateResponse(HttpStatusCode.OK, mNullList);
         //}
+        [HttpGet]
+        public HttpResponseMessage GetMobsWithoutPredefCoords()
+        {
+            try
+            {
+                var preDefds = db.PreDefCoords.Select(x => x.MobID_FK).ToList();
+                var mobs = db.Mob.Where(x => !preDefds.Contains(x.MobID)).ToList();
+                List<Mob> mNullList = removeNullValues(mobs);
+                return Request.CreateResponse(HttpStatusCode.OK, mNullList);
+
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
         private List<Mob> removeNullValues(List<Mob> mobs)
         {
             var list = new List<Mob>();

@@ -72,9 +72,9 @@
         </EntityType>
         <EntityType Name="MobCoords">
           <Key>
-            <PropertyRef Name="MobID" />
+            <PropertyRef Name="MobCoordID" />
           </Key>
-          <Property Name="MobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobCoordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MobID_FK" Type="int" />
           <Property Name="MobLat" Type="float" />
           <Property Name="MobLon" Type="float" />
@@ -647,9 +647,9 @@
         </EntityType>
         <EntityType Name="MobCoords">
           <Key>
-            <PropertyRef Name="MobID" />
+            <PropertyRef Name="MobCoordID" />
           </Key>
-          <Property Name="MobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobCoordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MobID_FK" Type="Int32" />
           <Property Name="MobLat" Type="Double" />
           <Property Name="MobLon" Type="Double" />
@@ -1222,7 +1222,7 @@
           <EntitySetMapping Name="MobCoords">
             <EntityTypeMapping TypeName="FYP_DBModel.MobCoords">
               <MappingFragment StoreEntitySet="MobCoords">
-                <ScalarProperty Name="MobID" ColumnName="MobID" />
+                <ScalarProperty Name="MobCoordID" ColumnName="MobCoordID" />
                 <ScalarProperty Name="MobID_FK" ColumnName="MobID_FK" />
                 <ScalarProperty Name="MobLat" ColumnName="MobLat" />
                 <ScalarProperty Name="MobLon" ColumnName="MobLon" />

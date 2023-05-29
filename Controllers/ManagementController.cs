@@ -100,7 +100,7 @@ namespace mob_monitoring_api.Controllers
             try
             {
                 var mobId = db.MobOperator.Where(x => x.UserId_FK == opId).Select(x => x.MobId_FK).ToList();
-                var mobs = db.Mob.Where(x => mobId.Contains(x.MobID)).ToList();
+                var mobs = db.Mob.Where(x => mobId.Contains(x.MobID)).FirstOrDefault();
                 return Request.CreateResponse(HttpStatusCode.OK, mobs);
             }
             catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }

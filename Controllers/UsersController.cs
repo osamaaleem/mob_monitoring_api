@@ -39,7 +39,6 @@ namespace mob_monitoring_api.Controllers
                     us.UserID = u.UserID;
                     us.Name = u.Name;
                     us.Email = u.Email;
-                
                     us.Password = u.Password;
 
                     us.Role = u.Role;

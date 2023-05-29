@@ -14,7 +14,7 @@ namespace mob_monitoring_api.Models
     
     public partial class MobCoords
     {
-        public int MobID { get; set; }
+        public int MobCoordID { get; set; }
         public Nullable<int> MobID_FK { get; set; }
         public Nullable<double> MobLat { get; set; }
         public Nullable<double> MobLon { get; set; }
