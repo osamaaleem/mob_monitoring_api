@@ -88,8 +88,8 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                int mobId = db.MobOfficer.Where(x => x.UserId_FK == ofId).Select(x => x.MobId_FK).toList();
-                var mobs = db.Mob.Where(x => x.MobID == mobId).ToList();
+                var mobIds = db.MobOfficer.Where(x => x.UserId_FK == offId).Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => mobIds.Contains(x.MobID)).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, mobs);
             }
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
@@ -99,8 +99,8 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                int mobId = db.MobOperator.Where(x => x.UserId_FK == opId).Select(x => x.MobId_FK).toList();
-                var mobs = db.Mob.Where(x => x.MobID == mobId).ToList();
+                var mobId = db.MobOperator.Where(x => x.UserId_FK == opId).Select(x => x.MobId_FK).ToList();
+                var mobs = db.Mob.Where(x => mobId.Contains(x.MobID)).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, mobs);
             }
             catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
