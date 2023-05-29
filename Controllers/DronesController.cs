@@ -64,6 +64,7 @@ namespace mob_monitoring_api.Controllers
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
+        
         [HttpGet]
         public HttpResponseMessage GetAllotedDrones(int id)
         {

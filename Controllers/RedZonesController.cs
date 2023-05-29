@@ -89,6 +89,20 @@ namespace mob_monitoring_api.Controllers
             }
         }
         [HttpPost]
+        public HttpResponseMessage DeleteRedzoneCoords(int id)
+        {
+            try
+            {
+                db.RedZoneCoordinates.RemoveRange(db.RedZoneCoordinates.Where(x => x.RedZoneID_FK == id));
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpPost]
         public HttpResponseMessage AddRedZoneCoords(List<RedZoneCoordinates> rcList)
         {
             try
