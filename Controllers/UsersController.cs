@@ -77,7 +77,7 @@ namespace mob_monitoring_api.Controllers
             var users = db.User.ToList();
             return Request.CreateResponse(HttpStatusCode.OK, users);
         }
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage DeleteUser(int id)
         {
             var user = db.User.Where(x => x.UserID == id).FirstOrDefault();

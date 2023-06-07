@@ -94,6 +94,7 @@ namespace mob_monitoring_api.Controllers
             }
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
         }
+
         [HttpGet]
         public HttpResponseMessage getMobByOperatorId(int opId)
         {
