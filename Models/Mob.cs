@@ -42,6 +42,7 @@ namespace mob_monitoring_api.Models
         public Nullable<double> MobEndLat { get; set; }
         public Nullable<double> MobEndLon { get; set; }
         public string MobType { get; set; }
+        public Nullable<bool> isDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AllotedRedZones> AllotedRedZones { get; set; }

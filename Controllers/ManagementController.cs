@@ -72,16 +72,19 @@ namespace mob_monitoring_api.Controllers
             }
             
         }
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage AllocateMobToOperator(int mobId, int userId)
         {
-            
-            MobOperator mo = new MobOperator();
-            mo.MobId_FK = mobId;
-            mo.UserId_FK = userId;
-            db.MobOperator.Add(mo);
-            db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.OK);
+            try
+            {
+                MobOperator mo = new MobOperator();
+                mo.MobId_FK = mobId;
+                mo.UserId_FK = userId;
+                db.MobOperator.Add(mo);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
         }
         [HttpGet]
         public HttpResponseMessage getMobByOfficerId(int offId)
@@ -107,16 +110,20 @@ namespace mob_monitoring_api.Controllers
             catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
         }
 
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage AllocateMobToOfficer(int mobId, int userId)
         {
 
-            MobOfficer mo = new MobOfficer();
-            mo.MobId_FK = mobId;
-            mo.UserId_FK = userId;
-            db.MobOfficer.Add(mo);
-            db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.OK);
+            try
+            {
+                MobOfficer mo = new MobOfficer();
+                mo.MobId_FK = mobId;
+                mo.UserId_FK = userId;
+                db.MobOfficer.Add(mo);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
         }
         
     }

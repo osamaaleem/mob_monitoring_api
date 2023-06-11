@@ -9,7 +9,7 @@ namespace mob_monitoring_api.Utilities
 {
     public class Utility
     {
-        public bool CheckPointInPolygon(RedZoneCoordinates[] polygon, LatLng point)
+        public bool CheckPointInPolygon(RedZoneCoordinates[] polygon, RedZoneCoordinates point)
         {
             PointF[] lpf = new PointF[100];
 
@@ -19,7 +19,7 @@ namespace mob_monitoring_api.Utilities
                 lpf[i] = ConvertToPoint((double)polygon[i].RedZoneLat, (double)polygon[i].RedZoneLon);
             }
 
-            PointF pf = ConvertToPoint(point.lat, point.lng);
+            PointF pf = ConvertToPoint((double)point.RedZoneLat, (double)point.RedZoneLon);
 
 
             bool r = IsPointInPolygon(lpf, pf);

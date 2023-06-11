@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FYP_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FYP_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AllotedDrones">
           <Key>
             <PropertyRef Name="AllocationID" />
@@ -69,6 +69,7 @@
           <Property Name="MobEndLat" Type="float" />
           <Property Name="MobEndLon" Type="float" />
           <Property Name="MobType" Type="varchar" MaxLength="50" />
+          <Property Name="isDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="MobCoords">
           <Key>
@@ -549,8 +550,7 @@
             <End Role="Video" EntitySet="Video" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FYP_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -644,6 +644,7 @@
           <NavigationProperty Name="MobTimeline" Relationship="Self.FK__MobTimeli__MobID__2A164134" FromRole="Mob" ToRole="MobTimeline" />
           <NavigationProperty Name="PreDefCoords" Relationship="Self.FK__PreDefCoo__MobID__05D8E0BE" FromRole="Mob" ToRole="PreDefCoords" />
           <NavigationProperty Name="Video" Relationship="Self.FK__Video__MobID_FK__693CA210" FromRole="Mob" ToRole="Video" />
+          <Property Name="isDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="MobCoords">
           <Key>
@@ -1204,6 +1205,7 @@
           <EntitySetMapping Name="Mob">
             <EntityTypeMapping TypeName="FYP_DBModel.Mob">
               <MappingFragment StoreEntitySet="Mob">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="MobID" ColumnName="MobID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />

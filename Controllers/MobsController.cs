@@ -41,13 +41,13 @@ namespace mob_monitoring_api.Controllers
             db.SaveChanges();
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage DeleteMob(int id)
         {
             try
             {
                 var m = db.Mob.Where(x => x.MobID == id).FirstOrDefault();
-                db.Mob.Remove(m);
+                m.isDeleted = true;
                 db.SaveChanges();
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
@@ -273,7 +273,7 @@ namespace mob_monitoring_api.Controllers
             var list = new List<Mob>();
             foreach (Mob m in mobs)
             {
-                if (m.ProputedStrength == null || m.StartDate == null || m.IsActive == null || m.MobStartLat == null || m.MobStartLon == null)
+                if (m.ProputedStrength == null || m.StartDate == null || m.IsActive == null || m.MobStartLat == null || m.MobStartLon == null || m.isDeleted == true)
                 {
                     continue;
                 }

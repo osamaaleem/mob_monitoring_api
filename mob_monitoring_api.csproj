@@ -317,6 +317,8 @@
     <Compile Include="Controllers\MobCoordController.cs" />
     <Compile Include="Controllers\MobDetailsController.cs" />
     <Compile Include="Controllers\MobsController.cs" />
+    <Compile Include="Controllers\OfficerController.cs" />
+    <Compile Include="Controllers\OperatorController.cs" />
     <Compile Include="Controllers\RedZonesController.cs" />
     <Compile Include="Controllers\StandardController.cs" />
     <Compile Include="Controllers\TimelineController.cs" />
