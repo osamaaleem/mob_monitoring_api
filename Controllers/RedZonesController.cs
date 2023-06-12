@@ -43,6 +43,20 @@ namespace mob_monitoring_api.Controllers
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
+        [HttpGet]
+        public HttpResponseMessage GetUnallocatedRedzones()
+        {
+            try
+            {
+                var zoneIds = db.AllotedRedZones.Select(x => x.RedZoneID_FK).ToList();
+                var zones = db.RedZone.Where(x => !zoneIds.Contains(x.RedZoneID)).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, zones);
+            }
+            catch(Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
         [HttpPost]
         public HttpResponseMessage UpdateRedzone(RedZone r)
         {
@@ -64,7 +78,7 @@ namespace mob_monitoring_api.Controllers
         {
             try
             {
-                var redZoneName = db.RedZone.Where(x => x.Name == name).Select(x => x.RedZoneID);
+                var redZoneName = db.RedZone.Where(x => x.Name == name).Select(x => x.RedZoneID).FirstOrDefault();
                 return Request.CreateResponse(HttpStatusCode.OK, redZoneName);
             }
             catch (Exception)

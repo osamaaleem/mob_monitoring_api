@@ -45,6 +45,20 @@ namespace mob_monitoring_api.Controllers
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
             
         }
+        [HttpGet]
+        public HttpResponseMessage AllocateMobToRedZone(int mobId, int zoneId)
+        {
+            try
+            {
+                AllotedRedZones arz = new AllotedRedZones();
+                arz.MobID_FK = mobId;
+                arz.RedZoneID_FK = zoneId;
+                db.AllotedRedZones.Add(arz);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+        }
 
         [HttpGet]
         public HttpResponseMessage GetOfficers()

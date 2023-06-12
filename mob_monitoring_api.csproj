@@ -311,6 +311,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\DronesController.cs" />
     <Compile Include="Controllers\LiveDataController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
@@ -363,6 +364,7 @@
     <Compile Include="Models\MobCoords.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MobDetail.cs" />
     <Compile Include="Models\MobOfficer.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
@@ -384,6 +386,7 @@
     <Compile Include="Models\RedZoneCoordinates.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RedzoneDetail.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>FYP_DBEntities.tt</DependentUpon>
     </Compile>
