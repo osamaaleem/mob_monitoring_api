@@ -159,6 +159,7 @@ namespace mob_monitoring_api.Controllers
         public HttpResponseMessage AddRedZone(RedZone r)
         {
             db.RedZone.Add(r);
+            db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
         [HttpPost]
