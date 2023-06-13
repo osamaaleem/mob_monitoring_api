@@ -139,6 +139,20 @@ namespace mob_monitoring_api.Controllers
             }
             catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
         }
+        [HttpGet]
+        public HttpResponseMessage AllocateDroneToOperator(int droneId, int userId)
+        {
+            try
+            {
+                AllotedDrones ad = new AllotedDrones();
+                ad.DroneID_FK = droneId;
+                ad.UserID_FK = userId;
+                db.AllotedDrones.Add(ad);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+        }
         
     }
 }

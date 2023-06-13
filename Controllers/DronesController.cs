@@ -89,6 +89,20 @@ namespace mob_monitoring_api.Controllers
             }
         }
         [HttpGet]
+        public HttpResponseMessage GetUnAllocatedDrones()
+        {
+            try
+            {
+                var droneIds = db.AllotedDrones.Select(x => x.DroneID_FK).ToList();
+                var drones = db.Drone.Where(x => !droneIds.Contains(x.DroneID)).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, drones);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
         public HttpResponseMessage GetAllDrones()
         {
             try

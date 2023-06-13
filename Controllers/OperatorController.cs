@@ -24,6 +24,16 @@ namespace mob_monitoring_api.Controllers
             }
             catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
         }
+        [HttpGet]
+        public HttpResponseMessage GetOperators()
+        {
+            try
+            {
+                var officers = db.User.Where(x => x.Role == "Operator").ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, officers);
+            }
+            catch (Exception) { return Request.CreateResponse(HttpStatusCode.InternalServerError); }
+        }
     }
 }
 
