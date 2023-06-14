@@ -81,6 +81,42 @@ namespace mob_monitoring_api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No mobs found.");
             }
         }
+        [HttpGet]
+        public HttpResponseMessage GetMobsByOperatorId(int opId)
+        {
+            try
+            {
+                var mobId = db.MobOperator.Where(x => x.UserId_FK == opId).Select(x => x.MobId_FK).FirstOrDefault();
+                var mob = db.Mob.Where(x => x.MobID == mobId).FirstOrDefault();
+                if (mob == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, mob);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetMobByOfficerId(int ofId)
+        {
+            try
+            {
+                var mobId = db.MobOfficer.Where(x => x.UserId_FK == ofId).Select(x => x.MobId_FK).ToList();
+                var mob = db.Mob.Where(x => mobId.Contains(x.MobID)).ToList();
+                if (mob == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, mob);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
         //[HttpGet]
         //public HttpResponseMessage GetMobsByUserId(int id)
         //{
